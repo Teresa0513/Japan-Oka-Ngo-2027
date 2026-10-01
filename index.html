@@ -5,9 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>WINTER JAPAN 2027｜沖繩・高山・名古屋</title>
 <meta name="description" content="2027 冬季日本旅行手冊｜沖繩・高山・白川鄉・名古屋">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+
 <style>
 :root{
   --ink:#22201d; --muted:#77716a; --paper:#f4f1ea; --paper2:#ebe6dc;
@@ -16,24 +14,24 @@
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.75}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.85}
 a{color:inherit;text-decoration:none}
 img{display:block;width:100%;height:100%;object-fit:cover}
 ::selection{background:#d9c5b6}
 .topbar{position:fixed;z-index:30;top:0;left:0;right:0;height:58px;background:rgba(244,241,234,.88);backdrop-filter:blur(14px);border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 4vw}
-.brand{font-size:11px;letter-spacing:.22em;font-weight:600}
+.brand{font-size:12px;letter-spacing:.22em;font-weight:600}
 .toplinks{display:flex;gap:20px;font-size:11px;letter-spacing:.12em;color:var(--muted)}
 .hero{min-height:100vh;display:grid;grid-template-columns:48% 52%;padding-top:58px;background:var(--paper)}
 .hero-copy{padding:10vh 8vw 7vh 9vw;display:flex;flex-direction:column;justify-content:center;position:relative}
 .kicker{font-size:11px;letter-spacing:.32em;color:var(--accent);margin-bottom:22px}
 .hero h1{font-family:var(--serif);font-weight:500;font-size:clamp(52px,7.2vw,112px);line-height:.98;letter-spacing:-.06em;margin:0 0 25px}
 .hero h1 span{display:block}
-.hero-sub{font-family:var(--serif);font-size:20px;line-height:1.7;max-width:500px;color:#514c46}
-.route{margin-top:42px;display:flex;align-items:center;gap:12px;font-size:11px;letter-spacing:.16em}
+.hero-sub{font-family:var(--serif);font-size:23px;line-height:1.7;max-width:500px;color:#514c46}
+.route{margin-top:42px;display:flex;align-items:center;gap:12px;font-size:13px;letter-spacing:.16em}
 .route i{height:1px;width:44px;background:var(--ink);display:block}
 .hero-meta{position:absolute;bottom:7vh;left:9vw;display:grid;grid-template-columns:repeat(3,auto);gap:34px}
 .meta b{display:block;font-family:var(--serif);font-size:22px;font-weight:500}
-.meta small{font-size:9px;letter-spacing:.18em;color:var(--muted)}
+.meta small{font-size:11px;letter-spacing:.18em;color:var(--muted)}
 .hero-visual{position:relative;overflow:hidden;background:#d7d5cf}
 .hero-visual .sea{position:absolute;inset:0 0 38% 0}
 .hero-visual .snow{position:absolute;left:0;right:0;bottom:0;height:44%;border-top:7px solid var(--paper);clip-path:polygon(0 17%,100% 0,100% 100%,0 100%);overflow:hidden}
@@ -45,7 +43,7 @@ img{display:block;width:100%;height:100%;object-fit:cover}
 .section-head p{font-size:10px;letter-spacing:.18em;color:var(--muted);margin:0}
 .overview{background:var(--paper2)}
 .overview-grid{display:grid;grid-template-columns:1.4fr .8fr;gap:80px}
-.manifesto{font-family:var(--serif);font-size:clamp(22px,2.5vw,34px);line-height:1.75;max-width:760px}
+.manifesto{font-family:var(--serif);font-size:clamp(22px,2.5vw,34px);line-height:1.85;max-width:760px}
 .manifesto em{color:var(--accent);font-style:normal}
 .factlist{border-top:1px solid var(--line)}
 .fact{display:flex;justify-content:space-between;padding:16px 0;border-bottom:1px solid var(--line);font-size:12px}
@@ -54,34 +52,34 @@ img{display:block;width:100%;height:100%;object-fit:cover}
 .route-strip{display:grid;grid-template-columns:repeat(5,1fr);margin-top:80px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
 .route-node{padding:24px 18px;min-height:120px;border-right:1px solid var(--line);position:relative}
 .route-node:last-child{border-right:0}
-.route-node .num{font-size:9px;letter-spacing:.2em;color:var(--muted)}
+.route-node .num{font-size:11px;letter-spacing:.2em;color:var(--muted)}
 .route-node h3{font-family:var(--serif);font-size:20px;font-weight:500;margin:10px 0 3px}
-.route-node p{font-size:10px;color:var(--muted);margin:0}
+.route-node p{font-size:13px;color:var(--muted);margin:0}
 .days-nav{position:sticky;top:58px;z-index:20;background:rgba(244,241,234,.94);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);overflow:auto;white-space:nowrap}
 .days-nav-inner{display:flex;padding:0 5vw}
-.days-nav a{padding:16px 18px;font-size:10px;letter-spacing:.12em;color:var(--muted);border-right:1px solid rgba(34,32,29,.08)}
+.days-nav a{padding:17px 18px;font-size:12px;letter-spacing:.12em;color:var(--muted);border-right:1px solid rgba(34,32,29,.08)}
 .days-nav a:hover{color:var(--accent)}
 .day{padding:110px 8vw 125px;position:relative}
 .day:nth-of-type(even){background:#f7f4ee}
 .day-grid{display:grid;grid-template-columns:26% 74%;gap:50px}
 .day-index{position:relative}
 .day-index .dayno{font-family:var(--serif);font-size:80px;line-height:.8;color:#d4cec3}
-.day-index .date{font-size:11px;letter-spacing:.18em;color:var(--accent);margin-top:22px}
+.day-index .date{font-size:13px;letter-spacing:.18em;color:var(--accent);margin-top:22px}
 .day-index h2{font-family:var(--serif);font-weight:500;font-size:38px;line-height:1.3;margin:12px 0}
-.day-index p{font-size:11px;color:var(--muted);max-width:220px}
+.day-index p{font-size:14px;color:var(--muted);max-width:220px}
 .day-main{min-width:0}
 .lead-photo{height:440px;position:relative;overflow:hidden;margin-bottom:30px}
 .lead-photo:after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(0,0,0,.38),transparent 45%)}
-.caption{position:absolute;left:25px;bottom:22px;color:white;z-index:2;font-size:10px;letter-spacing:.13em}
+.caption{position:absolute;left:25px;bottom:22px;color:white;z-index:2;font-size:12px;letter-spacing:.13em}
 .timeline{display:grid;grid-template-columns:105px 1fr;border-top:1px solid var(--line)}
 .stop{display:contents}
-.time{padding:20px 15px 20px 0;border-bottom:1px solid var(--line);font-size:10px;color:var(--accent);letter-spacing:.1em}
+.time{padding:21px 15px 21px 0;border-bottom:1px solid var(--line);font-size:13px;color:var(--accent);letter-spacing:.1em}
 .event{padding:18px 0;border-bottom:1px solid var(--line)}
 .event strong{font-family:var(--serif);font-size:19px;font-weight:500}
-.event p{margin:4px 0 0;color:var(--muted);font-size:12px}
-.event .tag{display:inline-block;margin-left:8px;border:1px solid var(--line);padding:2px 7px;font-size:8px;letter-spacing:.08em;color:var(--muted)}
-.day-note{margin-top:28px;padding:24px 26px;background:#e9e3d8;border-left:3px solid var(--accent);font-family:var(--serif);font-size:15px}
-.day-note small{display:block;font-family:var(--sans);font-size:9px;letter-spacing:.16em;color:var(--accent);margin-bottom:7px}
+.event p{margin:5px 0 0;color:var(--muted);font-size:15px}
+.event .tag{display:inline-block;margin-left:8px;border:1px solid var(--line);padding:3px 8px;font-size:10px;letter-spacing:.08em;color:var(--muted)}
+.day-note{margin-top:28px;padding:26px 28px;background:#e9e3d8;border-left:3px solid var(--accent);font-family:var(--serif);font-size:17px}
+.day-note small{display:block;font-family:var(--sans);font-size:11px;letter-spacing:.16em;color:var(--accent);margin-bottom:7px}
 .photo-pair{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:30px 0}
 .photo-pair>div{height:220px;overflow:hidden}
 .photo-pair img{transition:transform .7s}
@@ -95,12 +93,12 @@ img{display:block;width:100%;height:100%;object-fit:cover}
 .practical-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
 .practical-card{background:var(--paper2);padding:32px}
 .practical-card h3{font-family:var(--serif);font-weight:500;font-size:22px;margin:0 0 12px}
-.practical-card p,.practical-card li{font-size:11px;color:var(--muted)}
+.practical-card p,.practical-card li{font-size:14px;color:var(--muted)}
 .practical-card ul{padding-left:18px;margin-bottom:0}
 .footer{padding:70px 8vw 90px;background:#1f211f;color:#ddd8ce;text-align:center}
 .footer .big{font-family:var(--serif);font-size:34px}
-.footer p{font-size:9px;letter-spacing:.18em;color:#8e8a82}
-.mapbtn{display:inline-block;margin-top:15px;border-bottom:1px solid currentColor;padding-bottom:2px;font-size:9px;letter-spacing:.12em;color:var(--accent)}
+.footer p{font-size:11px;letter-spacing:.18em;color:#8e8a82}
+.mapbtn{display:inline-block;margin-top:15px;border-bottom:1px solid currentColor;padding-bottom:2px;font-size:11px;letter-spacing:.12em;color:var(--accent)}
 @media(max-width:850px){
   .toplinks{display:none}.hero{grid-template-columns:1fr;min-height:auto}.hero-copy{min-height:72vh;padding:100px 8vw 150px}.hero-visual{height:65vh}.hero-meta{left:8vw}
   .overview-grid,.chapter-grid{grid-template-columns:1fr;gap:40px}.route-strip{grid-template-columns:1fr 1fr}.route-node:nth-child(2n){border-right:0}
@@ -108,11 +106,36 @@ img{display:block;width:100%;height:100%;object-fit:cover}
   .practical-grid{grid-template-columns:1fr}.photo-pair>div{height:160px}
 }
 @media(max-width:520px){
-  .hero h1{font-size:54px}.hero-meta{grid-template-columns:1fr 1fr;gap:16px}.hero-meta .meta:last-child{display:none}
-  .route-strip{grid-template-columns:1fr}.route-node{border-right:0;border-bottom:1px solid var(--line)}
-  .section,.day,.chapter{padding-left:6vw;padding-right:6vw}.days-nav-inner{padding:0 2vw}.days-nav a{padding:14px 12px}
-  .timeline{grid-template-columns:72px 1fr}.photo-pair{grid-template-columns:1fr}
+  .hero h1{font-size:58px}
+  .hero-sub{font-size:21px;line-height:1.85}
+  .hero-meta{grid-template-columns:1fr 1fr;gap:18px}.hero-meta .meta:last-child{display:none}
+  .meta b{font-size:25px}
+  .route-strip{grid-template-columns:1fr}.route-node{border-right:0;border-bottom:1px solid var(--line);padding:26px 18px}
+  .route-node h3{font-size:25px}.route-node p{font-size:15px}
+  .section,.day,.chapter{padding-left:6vw;padding-right:6vw}
+  .days-nav-inner{padding:0 2vw}.days-nav a{padding:16px 13px;font-size:13px}
+  .timeline{grid-template-columns:82px 1fr}
+  .time{font-size:14px;padding-top:23px;padding-bottom:23px}
+  .event{padding:20px 0}
+  .event strong{font-size:22px}
+  .event p{font-size:16px;line-height:1.8}
+  .photo-pair{grid-template-columns:1fr}
+  .day-index .dayno{font-size:68px}
+  .day-index .date{font-size:14px}
+  .day-index h2{font-size:43px}
+  .day-index p{font-size:16px;line-height:1.8}
+  .fact{font-size:16px;padding:21px 0}
+  .manifesto{font-size:25px;line-height:1.9}
+  .section-head h2{font-size:38px}
 }
+</style>
+
+<style>
+.lead-photo img,.photo-pair img,.hero-visual img{
+  filter:saturate(.92) contrast(.96);
+}
+.hero-visual .sea img{object-position:center 48%}
+.hero-visual .snow img{object-position:center 52%}
 </style>
 </head>
 <body>
@@ -215,7 +238,7 @@ img{display:block;width:100%;height:100%;object-fit:cover}
 <section class="day" id="d3">
 <div class="day-grid"><aside class="day-index"><div class="dayno">03</div><div class="date">JAN 31 · SUN</div><h2>白川鄉。</h2><p>雪屋、合掌造、冬季點燈。</p></aside>
 <main class="day-main">
-<div class="lead-photo"><img src="https://cdn.kinnso.ai/laravel/posts/20241114-japan/content/1731572913_Screenshot_2024-11-14_at_4.20.22%E2%80%AFPM_%281%29.png" alt="Shirakawa-go winter"></div>
+<div class="lead-photo"><img src="https://media.blacktomato.com/cdn-cgi/image/width%3D1520%2Cheight%3D800%2Cfit%3Dcover%2Cquality%3D82%2Cformat%3Dauto/https%3A/media.blacktomato.com/2024/08/Takayama-houses-in-japan.jpg" alt="Shirakawa-go winter"></div>
 <div class="caption">SHIRAKAWA-GO / WINTER LIGHT-UP</div>
 <div class="timeline">
 <div class="time">14:50</div><div class="event"><strong>Nohi Bus Center</strong><p>集合，準備前往白川鄉。</p></div>
@@ -229,7 +252,7 @@ img{display:block;width:100%;height:100%;object-fit:cover}
 <section class="day" id="d4">
 <div class="day-grid"><aside class="day-index"><div class="dayno">04</div><div class="date">FEB 01 · MON</div><h2>慢慢逛。</h2><p>高山完整散步日。</p></aside>
 <main class="day-main">
-<div class="photo-pair"><div><img src="https://cdn.jeepe.jp/uploads/public_image/image/4529/normal_32e50e34-efea-488e-ad45-a5ce7950473d.jpg" alt="Takayama street"></div><div><img src="https://media.blacktomato.com/cdn-cgi/image/width%3D1520%2Cheight%3D800%2Cfit%3Dcover%2Cquality%3D82%2Cformat%3Dauto/https%3A/media.blacktomato.com/2024/08/Takayama-houses-in-japan.jpg" alt="Takayama houses"></div></div>
+<div class="photo-pair"><div><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/O/OnosakiShirozaemon/20240118/20240118120145.png" alt="Takayama street"></div><div><img src="https://media.blacktomato.com/cdn-cgi/image/width%3D1520%2Cheight%3D800%2Cfit%3Dcover%2Cquality%3D82%2Cformat%3Dauto/https%3A/media.blacktomato.com/2024/08/Takayama-houses-in-japan.jpg" alt="Takayama houses"></div></div>
 <div class="timeline">
 <div class="time">08:00</div><div class="event"><strong>宮川朝市</strong><p>冬季早晨從市場開始。</p></div>
 <div class="time">上午</div><div class="event"><strong>三町古街・中橋・高山陣屋</strong><p>木造街景、老店、飛驒牛一路慢慢走。</p></div>
@@ -241,7 +264,7 @@ img{display:block;width:100%;height:100%;object-fit:cover}
 <section class="day" id="d5">
 <div class="day-grid"><aside class="day-index"><div class="dayno">05</div><div class="date">FEB 02 · TUE</div><h2>離開雪。</h2><p>高山 → 名古屋。</p></aside>
 <main class="day-main">
-<div class="lead-photo"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/O/OnosakiShirozaemon/20240118/20240118120145.png" alt="Nagoya city and mountains"></div>
+<div class="lead-photo"><img src="https://en.japantravel.com/images/Photo/Upload/okinawa-winter-escape-2023-day-two/69568.jpg" alt="Nagoya city and mountains"></div>
 <div class="caption">NAGOYA / CITY MEETS MOUNTAINS</div>
 <div class="timeline">
 <div class="time">上午</div><div class="event"><strong>JR Hida 高山 → 名古屋</strong><p>窗外從雪山逐漸切換成城市。</p></div>
@@ -265,7 +288,7 @@ img{display:block;width:100%;height:100%;object-fit:cover}
 <section class="day" id="d7">
 <div class="day-grid"><aside class="day-index"><div class="dayno">07</div><div class="date">FEB 04 · THU</div><h2>吉卜力日。</h2><p>整天留給森林裡的故事。</p></aside>
 <main class="day-main">
-<div class="lead-photo"><img src="https://assets.st-note.com/img/1675017209648-eGlKcD6PGe.png" alt="Ghibli Park"></div>
+<div class="lead-photo"><img src="https://cdn.jeepe.jp/uploads/public_image/image/4529/normal_32e50e34-efea-488e-ad45-a5ce7950473d.jpg" alt="Ghibli Park"></div>
 <div class="caption">GHIBLI PARK / AICHI</div>
 <div class="timeline">
 <div class="time">全天</div><div class="event"><strong>Ghibli Park</strong><p>已排定整天，不另外塞名古屋景點。</p><span class="tag">RESERVATION</span></div>
@@ -276,7 +299,7 @@ img{display:block;width:100%;height:100%;object-fit:cover}
 <section class="day" id="d8">
 <div class="day-grid"><aside class="day-index"><div class="dayno">08</div><div class="date">FEB 05 · FRI</div><h2>神社與燈海。</h2><p>白天安靜，晚上發光。</p></aside>
 <main class="day-main">
-<div class="lead-photo"><img src="https://japanwelcomesyou.com/wp-content/uploads/t5431277.jpg" alt="Nabana no Sato illumination"></div>
+<div class="lead-photo"><img src="https://media.blacktomato.com/cdn-cgi/image/width%3D1520%2Cheight%3D800%2Cfit%3Dcover%2Cquality%3D82%2Cformat%3Dauto/https%3A/media.blacktomato.com/2024/08/Takayama-houses-in-japan.jpg" alt="Nabana no Sato illumination"></div>
 <div class="caption">NABANA NO SATO / NIGHT LIGHTS</div>
 <div class="timeline">
 <div class="time">上午</div><div class="event"><strong>熱田神宮</strong><p>從城市裡的一段安靜開始。</p></div>
@@ -306,7 +329,7 @@ img{display:block;width:100%;height:100%;object-fit:cover}
 <section class="day" id="d10">
 <div class="day-grid"><aside class="day-index"><div class="dayno">10</div><div class="date">FEB 07 · SUN</div><h2>回到沖繩。</h2><p>名古屋 → 那霸。</p></aside>
 <main class="day-main">
-<div class="lead-photo"><img src="https://en.japantravel.com/images/Photo/Upload/okinawa-winter-escape-2023-day-two/69568.jpg" alt="Okinawa coast"></div>
+<div class="lead-photo"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/O/OnosakiShirozaemon/20240118/20240118120145.png" alt="Okinawa coast"></div>
 <div class="caption">OKINAWA / SECOND CHAPTER</div>
 <div class="timeline">
 <div class="time">17:25</div><div class="event"><strong>BC557 · NGO → OKA</strong><p>離開名古屋，回到島上。</p></div>
@@ -328,7 +351,7 @@ img{display:block;width:100%;height:100%;object-fit:cover}
 <section class="day" id="d12">
 <div class="day-grid"><aside class="day-index"><div class="dayno">12</div><div class="date">FEB 09 · TUE</div><h2>向北。</h2><p>租車 DAY 01<br>美ら海・備瀨・古宇利。</p></aside>
 <main class="day-main">
-<div class="lead-photo"><img src="https://stat.ameba.jp/user_images/20230127/17/arakokitabi/52/a1/j/o1920127615235241447.jpg" alt="Okinawa winter beach"></div>
+<div class="lead-photo"><img src="https://en.japantravel.com/images/Photo/Upload/okinawa-winter-escape-2023-day-two/69568.jpg" alt="Okinawa winter beach"></div>
 <div class="caption">NORTH OKINAWA / ROAD TRIP</div>
 <div class="timeline">
 <div class="time">上午</div><div class="event"><strong>那霸 → 北部</strong><p>租車出發，沿海岸線北上。</p></div>
