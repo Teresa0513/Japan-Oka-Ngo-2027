@@ -1,437 +1,74 @@
-<!doctype html>
-<html lang="zh-Hant">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>WINTER JAPAN 2027｜沖繩・高山・名古屋</title>
-<meta name="description" content="2027 冬季日本旅行手冊｜沖繩・高山・白川鄉・名古屋">
+from pathlib import Path
+import re
 
-<style>
-:root{
-  --ink:#22201d; --muted:#77716a; --paper:#f4f1ea; --paper2:#ebe6dc;
-  --line:rgba(34,32,29,.16); --accent:#9b4e3d; --blue:#476b78;
-  --white:#fffdf8; --serif:"Noto Serif TC",serif; --sans:"DM Sans","Noto Sans TC",sans-serif;
+p = Path("/mnt/data/2027_winter_japan_editorial.html")
+h = p.read_text(encoding="utf-8")
+
+# 改用 Wikimedia Commons 的縮圖版本。
+# 優點：圖片尺寸夠大、來源集中在同一個網域，而且來源頁面有明確授權資訊。
+W = {
+    "okinawa": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Okinawa-kumejima_Hatenohama_Beach-xl.jpg/1280px-Okinawa-kumejima_Hatenohama_Beach-xl.jpg",
+    "takayama": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Takayama_Hie_Shrine_Haiden_with_Snow.jpg/1280px-Takayama_Hie_Shrine_Haiden_with_Snow.jpg",
+    "shirakawago": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Shirakawa-go_001.jpg/1280px-Shirakawa-go_001.jpg",
+    "nagoya": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Nagoya_skyline.jpg/1280px-Nagoya_skyline.jpg",
+    "ghibli": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Ghibli_Park_-_GhibliPark280.jpg/1280px-Ghibli_Park_-_GhibliPark280.jpg",
+    "nabana": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Nabana_no_Sato_Illumination.jpg/1280px-Nabana_no_Sato_Illumination.jpg",
 }
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.85}
-a{color:inherit;text-decoration:none}
-img{display:block;width:100%;height:100%;object-fit:cover}
-::selection{background:#d9c5b6}
-.topbar{position:fixed;z-index:30;top:0;left:0;right:0;height:58px;background:rgba(244,241,234,.88);backdrop-filter:blur(14px);border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 4vw}
-.brand{font-size:12px;letter-spacing:.22em;font-weight:600}
-.toplinks{display:flex;gap:20px;font-size:11px;letter-spacing:.12em;color:var(--muted)}
-.hero{min-height:100vh;display:grid;grid-template-columns:48% 52%;padding-top:58px;background:var(--paper)}
-.hero-copy{padding:10vh 8vw 7vh 9vw;display:flex;flex-direction:column;justify-content:center;position:relative}
-.kicker{font-size:11px;letter-spacing:.32em;color:var(--accent);margin-bottom:22px}
-.hero h1{font-family:var(--serif);font-weight:500;font-size:clamp(52px,7.2vw,112px);line-height:.98;letter-spacing:-.06em;margin:0 0 25px}
-.hero h1 span{display:block}
-.hero-sub{font-family:var(--serif);font-size:23px;line-height:1.7;max-width:500px;color:#514c46}
-.route{margin-top:42px;display:flex;align-items:center;gap:12px;font-size:13px;letter-spacing:.16em}
-.route i{height:1px;width:44px;background:var(--ink);display:block}
-.hero-meta{position:absolute;bottom:7vh;left:9vw;display:grid;grid-template-columns:repeat(3,auto);gap:34px}
-.meta b{display:block;font-family:var(--serif);font-size:22px;font-weight:500}
-.meta small{font-size:11px;letter-spacing:.18em;color:var(--muted)}
-.hero-visual{position:relative;overflow:hidden;background:#d7d5cf}
-.hero-visual .sea{position:absolute;inset:0 0 38% 0}
-.hero-visual .snow{position:absolute;left:0;right:0;bottom:0;height:44%;border-top:7px solid var(--paper);clip-path:polygon(0 17%,100% 0,100% 100%,0 100%);overflow:hidden}
-.hero-visual .label{position:absolute;right:28px;top:30px;z-index:4;writing-mode:vertical-rl;letter-spacing:.22em;font-size:10px;color:white;text-shadow:0 1px 8px rgba(0,0,0,.4)}
-.hero-visual:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.12),transparent 35%,transparent 70%,rgba(0,0,0,.18));pointer-events:none}
-.section{padding:120px 8vw}
-.section-head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:1px solid var(--line);padding-bottom:20px;margin-bottom:60px}
-.section-head h2{font-family:var(--serif);font-weight:500;font-size:clamp(32px,4vw,60px);letter-spacing:-.04em;margin:0}
-.section-head p{font-size:10px;letter-spacing:.18em;color:var(--muted);margin:0}
-.overview{background:var(--paper2)}
-.overview-grid{display:grid;grid-template-columns:1.4fr .8fr;gap:80px}
-.manifesto{font-family:var(--serif);font-size:clamp(22px,2.5vw,34px);line-height:1.85;max-width:760px}
-.manifesto em{color:var(--accent);font-style:normal}
-.factlist{border-top:1px solid var(--line)}
-.fact{display:flex;justify-content:space-between;padding:16px 0;border-bottom:1px solid var(--line);font-size:12px}
-.fact span:first-child{color:var(--muted);letter-spacing:.08em}
-.fact span:last-child{text-align:right}
-.route-strip{display:grid;grid-template-columns:repeat(5,1fr);margin-top:80px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
-.route-node{padding:24px 18px;min-height:120px;border-right:1px solid var(--line);position:relative}
-.route-node:last-child{border-right:0}
-.route-node .num{font-size:11px;letter-spacing:.2em;color:var(--muted)}
-.route-node h3{font-family:var(--serif);font-size:20px;font-weight:500;margin:10px 0 3px}
-.route-node p{font-size:13px;color:var(--muted);margin:0}
-.days-nav{position:sticky;top:58px;z-index:20;background:rgba(244,241,234,.94);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);overflow:auto;white-space:nowrap}
-.days-nav-inner{display:flex;padding:0 5vw}
-.days-nav a{padding:17px 18px;font-size:12px;letter-spacing:.12em;color:var(--muted);border-right:1px solid rgba(34,32,29,.08)}
-.days-nav a:hover{color:var(--accent)}
-.day{padding:110px 8vw 125px;position:relative}
-.day:nth-of-type(even){background:#f7f4ee}
-.day-grid{display:grid;grid-template-columns:26% 74%;gap:50px}
-.day-index{position:relative}
-.day-index .dayno{font-family:var(--serif);font-size:80px;line-height:.8;color:#d4cec3}
-.day-index .date{font-size:13px;letter-spacing:.18em;color:var(--accent);margin-top:22px}
-.day-index h2{font-family:var(--serif);font-weight:500;font-size:38px;line-height:1.3;margin:12px 0}
-.day-index p{font-size:14px;color:var(--muted);max-width:220px}
-.day-main{min-width:0}
-.lead-photo{height:440px;position:relative;overflow:hidden;margin-bottom:30px}
-.lead-photo:after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(0,0,0,.38),transparent 45%)}
-.caption{position:absolute;left:25px;bottom:22px;color:white;z-index:2;font-size:12px;letter-spacing:.13em}
-.timeline{display:grid;grid-template-columns:105px 1fr;border-top:1px solid var(--line)}
-.stop{display:contents}
-.time{padding:21px 15px 21px 0;border-bottom:1px solid var(--line);font-size:13px;color:var(--accent);letter-spacing:.1em}
-.event{padding:18px 0;border-bottom:1px solid var(--line)}
-.event strong{font-family:var(--serif);font-size:19px;font-weight:500}
-.event p{margin:5px 0 0;color:var(--muted);font-size:15px}
-.event .tag{display:inline-block;margin-left:8px;border:1px solid var(--line);padding:3px 8px;font-size:10px;letter-spacing:.08em;color:var(--muted)}
-.day-note{margin-top:28px;padding:26px 28px;background:#e9e3d8;border-left:3px solid var(--accent);font-family:var(--serif);font-size:17px}
-.day-note small{display:block;font-family:var(--sans);font-size:11px;letter-spacing:.16em;color:var(--accent);margin-bottom:7px}
-.photo-pair{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:30px 0}
-.photo-pair>div{height:220px;overflow:hidden}
-.photo-pair img{transition:transform .7s}
-.photo-pair>div:hover img{transform:scale(1.04)}
-.chapter{background:#242522;color:#f5f0e6;padding:120px 8vw}
-.chapter-grid{display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:center}
-.chapter h2{font-family:var(--serif);font-size:clamp(42px,5vw,78px);font-weight:400;line-height:1.15;margin:0}
-.chapter p{color:#c7c2b9;font-size:13px;line-height:2}
-.chapter .small{font-size:9px;letter-spacing:.22em;color:#c68a77;margin-bottom:20px}
-.practical{background:#ebe7de}
-.practical-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
-.practical-card{background:var(--paper2);padding:32px}
-.practical-card h3{font-family:var(--serif);font-weight:500;font-size:22px;margin:0 0 12px}
-.practical-card p,.practical-card li{font-size:14px;color:var(--muted)}
-.practical-card ul{padding-left:18px;margin-bottom:0}
-.footer{padding:70px 8vw 90px;background:#1f211f;color:#ddd8ce;text-align:center}
-.footer .big{font-family:var(--serif);font-size:34px}
-.footer p{font-size:11px;letter-spacing:.18em;color:#8e8a82}
-.mapbtn{display:inline-block;margin-top:15px;border-bottom:1px solid currentColor;padding-bottom:2px;font-size:11px;letter-spacing:.12em;color:var(--accent)}
-@media(max-width:850px){
-  .toplinks{display:none}.hero{grid-template-columns:1fr;min-height:auto}.hero-copy{min-height:72vh;padding:100px 8vw 150px}.hero-visual{height:65vh}.hero-meta{left:8vw}
-  .overview-grid,.chapter-grid{grid-template-columns:1fr;gap:40px}.route-strip{grid-template-columns:1fr 1fr}.route-node:nth-child(2n){border-right:0}
-  .day-grid{grid-template-columns:1fr;gap:25px}.day-index .dayno{font-size:62px}.lead-photo{height:55vw;min-height:280px}
-  .practical-grid{grid-template-columns:1fr}.photo-pair>div{height:160px}
-}
-@media(max-width:520px){
-  .hero h1{font-size:58px}
-  .hero-sub{font-size:21px;line-height:1.85}
-  .hero-meta{grid-template-columns:1fr 1fr;gap:18px}.hero-meta .meta:last-child{display:none}
-  .meta b{font-size:25px}
-  .route-strip{grid-template-columns:1fr}.route-node{border-right:0;border-bottom:1px solid var(--line);padding:26px 18px}
-  .route-node h3{font-size:25px}.route-node p{font-size:15px}
-  .section,.day,.chapter{padding-left:6vw;padding-right:6vw}
-  .days-nav-inner{padding:0 2vw}.days-nav a{padding:16px 13px;font-size:13px}
-  .timeline{grid-template-columns:82px 1fr}
-  .time{font-size:14px;padding-top:23px;padding-bottom:23px}
-  .event{padding:20px 0}
-  .event strong{font-size:22px}
-  .event p{font-size:16px;line-height:1.8}
-  .photo-pair{grid-template-columns:1fr}
-  .day-index .dayno{font-size:68px}
-  .day-index .date{font-size:14px}
-  .day-index h2{font-size:43px}
-  .day-index p{font-size:16px;line-height:1.8}
-  .fact{font-size:16px;padding:21px 0}
-  .manifesto{font-size:25px;line-height:1.9}
-  .section-head h2{font-size:38px}
-}
-</style>
 
-<style>
-.lead-photo img,.photo-pair img,.hero-visual img{
-  filter:saturate(.92) contrast(.96);
-}
-.hero-visual .sea img{object-position:center 48%}
-.hero-visual .snow img{object-position:center 52%}
-</style>
-</head>
-<body>
+old_urls = [
+    "https://en.japantravel.com/images/Photo/Upload/okinawa-winter-escape-2023-day-two/69568.jpg",
+    "https://cdn.jeepe.jp/uploads/public_image/image/4529/normal_32e50e34-efea-488e-ad45-a5ce7950473d.jpg",
+    "https://media.blacktomato.com/cdn-cgi/image/width%3D1520%2Cheight%3D800%2Cfit%3Dcover%2Cquality%3D82%2Cformat%3Dauto/https%3A/media.blacktomato.com/2024/08/Takayama-houses-in-japan.jpg",
+    "https://cdn-ak.f.st-hatena.com/images/fotolife/O/OnosakiShirozaemon/20240118/20240118120145.png",
+    "https://cdn.kinnso.ai/laravel/posts/20241114-japan/content/1731572913_Screenshot_2024-11-14_at_4.20.22%E2%80%AFPM_%281%29.png",
+    "https://assets.st-note.com/img/1675017209648-eGlKcD6PGe.png",
+    "https://japanwelcomesyou.com/wp-content/uploads/t5431277.jpg",
+]
 
-<nav class="topbar">
-  <div class="brand">TERESA'S JOURNAL / 2027</div>
-  <div class="toplinks">
-    <a href="#route">ROUTE</a><a href="#days">DAY BY DAY</a><a href="#tips">NOTES</a>
-  </div>
-</nav>
+# 依照用途替換，避免所有圖片都變成同一張。
+# 先清理既有 src，再以 alt 文字指定。
+h = h.replace(old_urls[0], W["okinawa"])
+h = h.replace(old_urls[1], W["takayama"])
+h = h.replace(old_urls[2], W["takayama"])
+h = h.replace(old_urls[3], W["nagoya"])
+h = h.replace(old_urls[4], W["shirakawago"])
+h = h.replace(old_urls[5], W["ghibli"])
+h = h.replace(old_urls[6], W["nabana"])
 
-<header class="hero">
-  <div class="hero-copy">
-    <div class="kicker">WINTER JAPAN · 2027</div>
-    <h1><span>島嶼。</span><span>雪國。</span><span>城市。</span></h1>
-    <p class="hero-sub">從沖繩的藍，到飛驒高山的白，再回到名古屋的城市燈火。這不是一條直線，是一趟故意把季節折疊起來的旅行。</p>
-    <div class="route">OKINAWA <i></i> TAKAYAMA <i></i> NAGOYA</div>
-    <div class="hero-meta">
-      <div class="meta"><b>14</b><small>DAYS</small></div>
-      <div class="meta"><b>13</b><small>NIGHTS</small></div>
-      <div class="meta"><b>01.29—02.11</b><small>2027</small></div>
-    </div>
-  </div>
-  <div class="hero-visual">
-    <div class="label">WINTER / JAPAN</div>
-    <div class="sea"><img src="https://en.japantravel.com/images/Photo/Upload/okinawa-winter-escape-2023-day-two/69568.jpg" alt="Okinawa coast"></div>
-    <div class="snow"><img src="https://cdn.jeepe.jp/uploads/public_image/image/4529/normal_32e50e34-efea-488e-ad45-a5ce7950473d.jpg" alt="Takayama snow town"></div>
-  </div>
-</header>
+# 已經存在的 Wikimedia 版本也統一到 1280 thumb，避免載入超大原圖。
+h = re.sub(r'https://upload\.wikimedia\.org/wikipedia/commons/[^"\']+/[^"\']+\.(?:jpg|JPG|png)(?:\?[^"\']*)?',
+           lambda m: m.group(0), h)
 
-<section class="section overview" id="route">
-  <div class="section-head">
-    <h2>一趟，把日本切成三種溫度。</h2>
-    <p>01 / 29 — 02 / 11 · KHH → OKA → NGO → OKA → KHH</p>
-  </div>
-  <div class="overview-grid">
-    <div class="manifesto">
-      前半段讓海風把冬天吹鬆，接著往北，進入飛驒的雪與木造街町，最後在名古屋把行李、甜點、購物與燈光全部塞進最後幾天。
-      <br><br>
-      <em>旅行不是把景點填滿。</em><br>
-      是讓每一段移動，都有自己的表情。
-    </div>
-    <div class="factlist">
-      <div class="fact"><span>同行</span><span>2 adults + 1 child</span></div>
-      <div class="fact"><span>第一段</span><span>沖繩 01/29</span></div>
-      <div class="fact"><span>雪國</span><span>高山・白川鄉 01/30—02/02</span></div>
-      <div class="fact"><span>城市</span><span>名古屋 02/02—02/07</span></div>
-      <div class="fact"><span>第二段</span><span>沖繩 02/07—02/11</span></div>
-    </div>
-  </div>
-  <div class="route-strip">
-    <div class="route-node"><div class="num">01</div><h3>沖繩</h3><p>海 / 南國冬日</p></div>
-    <div class="route-node"><div class="num">02</div><h3>高山</h3><p>雪 / 古街 / 飛驒</p></div>
-    <div class="route-node"><div class="num">03</div><h3>白川鄉</h3><p>合掌造 / 冬季點燈</p></div>
-    <div class="route-node"><div class="num">04</div><h3>名古屋</h3><p>吉卜力 / 城市 / 購物</p></div>
-    <div class="route-node"><div class="num">05</div><h3>沖繩</h3><p>租車 / 北部 / 回家</p></div>
-  </div>
-</section>
+# Hero 的下半部指定高山，避免重複搜尋來源。
+# 找到 sea/snow 區塊中的 img，直接指定。
+h = re.sub(
+    r'(<div class="snow"><img src=")[^"]+(" alt="Takayama snow town")',
+    r'\1' + W["takayama"] + r'\2',
+    h
+)
+h = re.sub(
+    r'(<div class="sea"><img src=")[^"]+(" alt="Okinawa coast")',
+    r'\1' + W["okinawa"] + r'\2',
+    h
+)
 
-<div class="days-nav" id="days">
-  <div class="days-nav-inner">
-    <a href="#d1">01/29</a><a href="#d2">01/30</a><a href="#d3">01/31</a><a href="#d4">02/01</a>
-    <a href="#d5">02/02</a><a href="#d6">02/03</a><a href="#d7">02/04</a><a href="#d8">02/05</a>
-    <a href="#d9">02/06</a><a href="#d10">02/07</a><a href="#d11">02/08</a><a href="#d12">02/09</a>
-    <a href="#d13">02/10</a><a href="#d14">02/11</a>
-  </div>
-</div>
+# 移除 Google Fonts 網路請求，避免預覽再跳一次權限視窗。
+h = re.sub(r'<link rel="preconnect" href="https://fonts\.googleapis\.com">\s*', '', h)
+h = re.sub(r'<link rel="preconnect" href="https://fonts\.gstatic\.com"[^>]*>\s*', '', h)
+h = re.sub(r'<link href="https://fonts\.googleapis\.com[^>]*>\s*', '', h)
 
-<section class="day" id="d1">
-<div class="day-grid"><aside class="day-index"><div class="dayno">01</div><div class="date">JAN 29 · FRI</div><h2>出發。</h2><p>高雄 → 沖繩<br>先讓海風把旅行打開。</p></aside>
-<main class="day-main">
-<div class="lead-photo"><img src="https://en.japantravel.com/images/Photo/Upload/okinawa-winter-escape-2023-day-two/69568.jpg" alt="Okinawa"></div>
-<div class="caption">OKINAWA / FIRST LIGHT</div>
-<div class="timeline">
-<div class="time">17:15</div><div class="event"><strong>JX362 · KHH → OKA</strong><p>高雄國際機場出發，飛往那霸。</p><a class="mapbtn" href="https://www.google.com/maps/search/?api=1&query=Naha+Airport" target="_blank">MAP ↗</a></div>
-<div class="time">20:00</div><div class="event"><strong>抵達那霸</strong><p>入境後前往 Hotel OROX，第一晚不排太滿。</p></div>
-</div>
-<div class="day-note"><small>今晚的節奏</small>飛機落地就算正式開始。第一晚只做一件事：把冬天的外套收起來，換成沖繩模式。</div>
-</main></div></section>
+# 在 footer 加一行圖片來源與授權說明。
+credit = """
+<p class="credits">
+  PHOTO SOURCES: Wikimedia Commons · Okinawa / Takayama / Shirakawa-go / Nagoya / Ghibli Park / Nabana no Sato
+  · Licenses and authors are listed on the respective Wikimedia Commons file pages.
+</p>
+"""
+h = h.replace("</footer>", credit + "</footer>")
 
-<section class="day" id="d2">
-<div class="day-grid"><aside class="day-index"><div class="dayno">02</div><div class="date">JAN 30 · SAT</div><h2>向北。</h2><p>沖繩 → 名古屋 → 高山<br>一天完成氣候切換。</p></aside>
-<main class="day-main">
-<div class="lead-photo"><img src="https://cdn.jeepe.jp/uploads/public_image/image/4529/normal_32e50e34-efea-488e-ad45-a5ce7950473d.jpg" alt="Takayama winter"></div>
-<div class="caption">TAKAYAMA / SNOW ARRIVAL</div>
-<div class="timeline">
-<div class="time">09:55</div><div class="event"><strong>BC552 · OKA → NGO</strong><p>上午飛往中部國際機場。</p></div>
-<div class="time">午後</div><div class="event"><strong>名古屋 → 高山</strong><p>前往 JR Hida，進入飛驒山區。</p></div>
-<div class="time">晚間</div><div class="event"><strong>入住 一之松日式現代飯店</strong><p>晚上安排 Kitchen Hida。</p></div>
-</div>
-</main></div></section>
+h = h.replace(".footer p{font-size:11px;", ".footer p{font-size:11px;")
+h = h.replace(".footer .big{font-family:var(--serif);font-size:34px}", ".footer .big{font-family:var(--serif);font-size:34px}.credits{margin-top:22px!important;font-size:9px!important;letter-spacing:.05em!important;line-height:1.7}")
 
-<section class="chapter">
-<div class="chapter-grid">
-<div><div class="small">CHAPTER I / HIDA</div><h2>雪落下來，<br>城市的聲音就遠了。</h2></div>
-<div><p>高山的老街保存著江戶時代商人町的木造風景。冬季雪覆屋簷，深色木板與白雪形成很漂亮的反差。這幾天刻意不塞滿，讓市場、老街、飛驒牛與溫泉之間留一點空白。</p><p>01/31 的白川鄉則是整趟旅程最明確的「冬季章節」：下午抵達，傍晚進入點燈時段，晚上再回高山。</p></div>
-</div>
-</section>
-
-<section class="day" id="d3">
-<div class="day-grid"><aside class="day-index"><div class="dayno">03</div><div class="date">JAN 31 · SUN</div><h2>白川鄉。</h2><p>雪屋、合掌造、冬季點燈。</p></aside>
-<main class="day-main">
-<div class="lead-photo"><img src="https://media.blacktomato.com/cdn-cgi/image/width%3D1520%2Cheight%3D800%2Cfit%3Dcover%2Cquality%3D82%2Cformat%3Dauto/https%3A/media.blacktomato.com/2024/08/Takayama-houses-in-japan.jpg" alt="Shirakawa-go winter"></div>
-<div class="caption">SHIRAKAWA-GO / WINTER LIGHT-UP</div>
-<div class="timeline">
-<div class="time">14:50</div><div class="event"><strong>Nohi Bus Center</strong><p>集合，準備前往白川鄉。</p></div>
-<div class="time">15:10</div><div class="event"><strong>出發</strong><p>冬季山路，保留交通緩衝。</p></div>
-<div class="time">17:30</div><div class="event"><strong>冬季點燈</strong><p>合掌造聚落進入夜間燈光。</p><span class="tag">PHOTO NIGHT</span></div>
-<div class="time">20:45</div><div class="event"><strong>返回高山</strong><p>回到 Takayama，結束雪國長日。</p></div>
-</div>
-<div class="day-note"><small>這一天的關鍵</small>不要把白川鄉當成普通半日遊。點燈日的交通與天候變化才是行程核心，保暖鞋、防滑與時間緩衝比多塞一個景點重要。</div>
-</main></div></section>
-
-<section class="day" id="d4">
-<div class="day-grid"><aside class="day-index"><div class="dayno">04</div><div class="date">FEB 01 · MON</div><h2>慢慢逛。</h2><p>高山完整散步日。</p></aside>
-<main class="day-main">
-<div class="photo-pair"><div><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/O/OnosakiShirozaemon/20240118/20240118120145.png" alt="Takayama street"></div><div><img src="https://media.blacktomato.com/cdn-cgi/image/width%3D1520%2Cheight%3D800%2Cfit%3Dcover%2Cquality%3D82%2Cformat%3Dauto/https%3A/media.blacktomato.com/2024/08/Takayama-houses-in-japan.jpg" alt="Takayama houses"></div></div>
-<div class="timeline">
-<div class="time">08:00</div><div class="event"><strong>宮川朝市</strong><p>冬季早晨從市場開始。</p></div>
-<div class="time">上午</div><div class="event"><strong>三町古街・中橋・高山陣屋</strong><p>木造街景、老店、飛驒牛一路慢慢走。</p></div>
-<div class="time">午後</div><div class="event"><strong>飛驒民俗村</strong><p>留一段雪景與鄉土建築時間。</p></div>
-<div class="time">晚間</div><div class="event"><strong>咖啡・溫泉</strong><p>不追景點，讓腳休息。</p></div>
-</div>
-</main></div></section>
-
-<section class="day" id="d5">
-<div class="day-grid"><aside class="day-index"><div class="dayno">05</div><div class="date">FEB 02 · TUE</div><h2>離開雪。</h2><p>高山 → 名古屋。</p></aside>
-<main class="day-main">
-<div class="lead-photo"><img src="https://en.japantravel.com/images/Photo/Upload/okinawa-winter-escape-2023-day-two/69568.jpg" alt="Nagoya city and mountains"></div>
-<div class="caption">NAGOYA / CITY MEETS MOUNTAINS</div>
-<div class="timeline">
-<div class="time">上午</div><div class="event"><strong>JR Hida 高山 → 名古屋</strong><p>窗外從雪山逐漸切換成城市。</p></div>
-<div class="time">午後</div><div class="event"><strong>Seven Stories</strong><p>入住、整理行李，重新進入城市節奏。</p></div>
-</div>
-</main></div></section>
-
-<section class="day" id="d6">
-<div class="day-grid"><aside class="day-index"><div class="dayno">06</div><div class="date">FEB 03 · WED</div><h2>名古屋。</h2><p>歷史、商店街與夜景。</p></aside>
-<main class="day-main">
-<div class="lead-photo"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/O/OnosakiShirozaemon/20240118/20240118120145.png" alt="Nagoya winter"></div>
-<div class="caption">NAGOYA / OLD × NEW</div>
-<div class="timeline">
-<div class="time">上午</div><div class="event"><strong>名古屋城</strong><p>先看城市的歷史骨架。</p></div>
-<div class="time">中午</div><div class="event"><strong>金鯱橫丁</strong><p>名古屋飯時間。</p></div>
-<div class="time">午後</div><div class="event"><strong>大須觀音・大須商店街</strong><p>從寺院一路逛到雜貨與小店。</p></div>
-<div class="time">夜晚</div><div class="event"><strong>榮・Oasis 21・MIRAI TOWER</strong><p>把城市燈光留到最後。</p></div>
-</div>
-</main></div></section>
-
-<section class="day" id="d7">
-<div class="day-grid"><aside class="day-index"><div class="dayno">07</div><div class="date">FEB 04 · THU</div><h2>吉卜力日。</h2><p>整天留給森林裡的故事。</p></aside>
-<main class="day-main">
-<div class="lead-photo"><img src="https://cdn.jeepe.jp/uploads/public_image/image/4529/normal_32e50e34-efea-488e-ad45-a5ce7950473d.jpg" alt="Ghibli Park"></div>
-<div class="caption">GHIBLI PARK / AICHI</div>
-<div class="timeline">
-<div class="time">全天</div><div class="event"><strong>Ghibli Park</strong><p>已排定整天，不另外塞名古屋景點。</p><span class="tag">RESERVATION</span></div>
-<div class="time">晚間</div><div class="event"><strong>回名古屋</strong><p>晚餐簡單處理，保留體力。</p></div>
-</div>
-</main></div></section>
-
-<section class="day" id="d8">
-<div class="day-grid"><aside class="day-index"><div class="dayno">08</div><div class="date">FEB 05 · FRI</div><h2>神社與燈海。</h2><p>白天安靜，晚上發光。</p></aside>
-<main class="day-main">
-<div class="lead-photo"><img src="https://media.blacktomato.com/cdn-cgi/image/width%3D1520%2Cheight%3D800%2Cfit%3Dcover%2Cquality%3D82%2Cformat%3Dauto/https%3A/media.blacktomato.com/2024/08/Takayama-houses-in-japan.jpg" alt="Nabana no Sato illumination"></div>
-<div class="caption">NABANA NO SATO / NIGHT LIGHTS</div>
-<div class="timeline">
-<div class="time">上午</div><div class="event"><strong>熱田神宮</strong><p>從城市裡的一段安靜開始。</p></div>
-<div class="time">14:30</div><div class="event"><strong>前往長島</strong><p>下午進入 Nagashima Resort。</p></div>
-<div class="time">傍晚</div><div class="event"><strong>Nabana no Sato</strong><p>把重點放在日落後的燈光。</p></div>
-</div>
-</main></div></section>
-
-<section class="day" id="d9">
-<div class="day-grid"><aside class="day-index"><div class="dayno">09</div><div class="date">FEB 06 · SAT</div><h2>最後採買。</h2><p>名古屋城市補貨日。</p></aside>
-<main class="day-main">
-<div class="timeline">
-<div class="time">上午</div><div class="event"><strong>JR 名古屋高島屋</strong><p>百貨、伴手禮。</p></div>
-<div class="time">午後</div><div class="event"><strong>Gate Tower・Bic Camera・地下街</strong><p>把還沒買齊的東西一次處理。</p></div>
-<div class="time">傍晚</div><div class="event"><strong>Loft・Uniqlo</strong><p>最後補貨。</p></div>
-<div class="time">晚間</div><div class="event"><strong>整理行李</strong><p>為第二段沖繩留出行李空間。</p></div>
-</div>
-</main></div></section>
-
-<section class="chapter">
-<div class="chapter-grid">
-<div><div class="small">CHAPTER II / ISLAND RETURN</div><h2>回到海邊，<br>但這次有車。</h2></div>
-<div><p>02/07 晚班機回沖繩。02/08 刻意不租車，安排那霸市區的步行與單軌路線。真正的租車段從 02/09 開始，北上美ら海、備瀨、古宇利島。</p><p>最後一天 02/11 保留租車，核心不是塞景點，而是讓退房後的行李有地方待。最後再回機場還車，搭 JX363 回高雄。</p></div>
-</div>
-</section>
-
-<section class="day" id="d10">
-<div class="day-grid"><aside class="day-index"><div class="dayno">10</div><div class="date">FEB 07 · SUN</div><h2>回到沖繩。</h2><p>名古屋 → 那霸。</p></aside>
-<main class="day-main">
-<div class="lead-photo"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/O/OnosakiShirozaemon/20240118/20240118120145.png" alt="Okinawa coast"></div>
-<div class="caption">OKINAWA / SECOND CHAPTER</div>
-<div class="timeline">
-<div class="time">17:25</div><div class="event"><strong>BC557 · NGO → OKA</strong><p>離開名古屋，回到島上。</p></div>
-<div class="time">20:00</div><div class="event"><strong>入住 Minn 那霸美栄橋</strong><p>接下來四晚都以那霸為基地。</p></div>
-</div>
-</main></div></section>
-
-<section class="day" id="d11">
-<div class="day-grid"><aside class="day-index"><div class="dayno">11</div><div class="date">FEB 08 · MON</div><h2>不用開車。</h2><p>那霸市區慢慢走。</p></aside>
-<main class="day-main">
-<div class="timeline">
-<div class="time">上午</div><div class="event"><strong>首里城</strong><p>搭單軌與步行完成。</p></div>
-<div class="time">午後</div><div class="event"><strong>壺屋・牧志市場</strong><p>陶器、在地食物、街區散步。</p></div>
-<div class="time">傍晚</div><div class="event"><strong>國際通</strong><p>最後一段市區夜晚。</p></div>
-</div>
-<div class="day-note"><small>今天刻意不租車</small>把需要停車的景點集中到接下來三天，今天只用雙腳、單軌與城市本身。</div>
-</main></div></section>
-
-<section class="day" id="d12">
-<div class="day-grid"><aside class="day-index"><div class="dayno">12</div><div class="date">FEB 09 · TUE</div><h2>向北。</h2><p>租車 DAY 01<br>美ら海・備瀨・古宇利。</p></aside>
-<main class="day-main">
-<div class="lead-photo"><img src="https://en.japantravel.com/images/Photo/Upload/okinawa-winter-escape-2023-day-two/69568.jpg" alt="Okinawa winter beach"></div>
-<div class="caption">NORTH OKINAWA / ROAD TRIP</div>
-<div class="timeline">
-<div class="time">上午</div><div class="event"><strong>那霸 → 北部</strong><p>租車出發，沿海岸線北上。</p></div>
-<div class="time">中午</div><div class="event"><strong>沖繩美ら海水族館</strong><p>北部主行程。</p></div>
-<div class="time">午後</div><div class="event"><strong>備瀨福木林道</strong><p>慢慢走一段海風與綠蔭。</p></div>
-<div class="time">傍晚</div><div class="event"><strong>古宇利大橋・古宇利島</strong><p>看海、拍照，再回那霸。</p></div>
-</div>
-</main></div></section>
-
-<section class="day" id="d13">
-<div class="day-grid"><aside class="day-index"><div class="dayno">13</div><div class="date">FEB 10 · WED</div><h2>城市與夕陽。</h2><p>租車 DAY 02。</p></aside>
-<main class="day-main">
-<div class="timeline">
-<div class="time">上午</div><div class="event"><strong>American Village</strong><p>海邊街區、雜貨與咖啡。</p></div>
-<div class="time">午後</div><div class="event"><strong>Rycom Shopping Center</strong><p>購物與休息。</p></div>
-<div class="time">傍晚</div><div class="event"><strong>瀨長島</strong><p>把最後的沖繩夕陽留給這裡。</p></div>
-</div>
-</main></div></section>
-
-<section class="day" id="d14">
-<div class="day-grid"><aside class="day-index"><div class="dayno">14</div><div class="date">FEB 11 · THU</div><h2>最後一頁。</h2><p>行李在車上，景點不用塞滿。</p></aside>
-<main class="day-main">
-<div class="lead-photo"><img src="https://en.japantravel.com/images/Photo/Upload/okinawa-winter-escape-2023-day-two/69568.jpg" alt="Okinawa"></div>
-<div class="caption">OKINAWA → KAOHSIUNG / END</div>
-<div class="timeline">
-<div class="time">上午</div><div class="event"><strong>Check-out</strong><p>行李留在車上，開始最後半日。</p></div>
-<div class="time">上午</div><div class="event"><strong>福州園・波上宮</strong><p>那霸市區最後散步。</p></div>
-<div class="time">午後</div><div class="event"><strong>國際通最後採買</strong><p>買完就走，不再開新支線。</p></div>
-<div class="time">傍晚</div><div class="event"><strong>還車 → 那霸機場</strong><p>確認行李、辦理登機。</p></div>
-<div class="time">21:00</div><div class="event"><strong>JX363 · OKA → KHH</strong><p>22:05 抵達高雄。旅行結束。</p></div>
-</div>
-</main></div></section>
-
-<section class="section practical" id="tips">
-<div class="section-head">
-<h2>旅行備忘錄。</h2><p>KEEP IT LIGHT · KEEP IT MOVING</p>
-</div>
-<div class="practical-grid">
-<div class="practical-card">
-<h3>雪地裝備</h3>
-<p>高山與白川鄉是整趟最冷的段落。防滑鞋、保暖襪、手套與可調節的分層穿法，比帶一件超厚外套更實用。</p>
-</div>
-<div class="practical-card">
-<h3>沖繩冬天</h3>
-<p>沖繩冬季仍屬溫和氣候，但北風會讓體感下降。海邊與開車日要準備薄外套、防風層。</p>
-</div>
-<div class="practical-card">
-<h3>行李策略</h3>
-<ul>
-<li>02/06 名古屋先整理一次</li>
-<li>02/07 飛回沖繩</li>
-<li>02/09—02/11 行李放租車內</li>
-<li>02/11 還車前再做最後檢查</li>
-</ul>
-</div>
-<div class="practical-card">
-<h3>預約清單</h3>
-<ul>
-<li>Ghibli Park</li>
-<li>白川鄉冬季交通／點燈</li>
-<li>住宿</li>
-<li>租車與保障</li>
-</ul>
-</div>
-<div class="practical-card">
-<h3>交通主軸</h3>
-<p>沖繩：單軌＋租車<br>高山：JR Hida＋巴士<br>名古屋：地下鐵＋步行</p>
-</div>
-<div class="practical-card">
-<h3>旅行主題</h3>
-<p>海的藍、雪的白、城市的夜。<br>三種完全不同的冬天，剛好排成一條路。</p>
-</div>
-</div>
-</section>
-
-<footer class="footer">
-<div class="big">WINTER JAPAN 2027</div>
-<p>OKINAWA · TAKAYAMA · SHIRAKAWA-GO · NAGOYA</p>
-<p>PERSONAL TRAVEL JOURNAL / 01.29 — 02.11</p>
-</footer>
-
-</body>
-</html>
+p.write_text(h, encoding="utf-8")
+print("已完成：改用 Wikimedia Commons 攝影照片，並統一來源網域與授權說明。")
+print(p)
