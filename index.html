@@ -676,7 +676,7 @@ body::before{content:"";position:fixed;z-index:100;top:0;left:0;width:var(--scro
  add('.day-index','.reveal-left');
  add('.lead-photo,.photo-pair,.hero-visual','reveal-scale');
  const targets=document.querySelectorAll('.reveal,.reveal-left,.reveal-scale');
- const io=new IntersectionObserver(entries=>entries.forEach(x=>{if(x.isIntersecting){x.target.classList.add('is-visible');io.unobserve(x.target)}}),{threshold:.14,rootMargin:'0px 0px -8% 0px'});
+ const io=new IntersectionObserver(entries=>entries.forEach(x=>{if(x.isIntersecting){x.target.classList.add('is-visible')}else{x.target.classList.remove('is-visible')}}),{threshold:.14,rootMargin:'0px 0px -8% 0px'});
  targets.forEach(e=>io.observe(e));
  if(!matchMedia('(prefers-reduced-motion: reduce)').matches){
    const hero=document.querySelector('.hero-visual'),img=document.querySelector('.hero-visual .sea img');
