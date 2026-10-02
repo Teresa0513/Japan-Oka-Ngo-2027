@@ -327,6 +327,42 @@ body {
   .route{margin-top:32px;margin-bottom:0;white-space:nowrap}
 }
 </style>
+
+<style id="travel-editorial-motion">
+:root{--motion-ease:cubic-bezier(.22,.61,.36,1)}
+html{scroll-behavior:smooth}
+body::before{content:"";position:fixed;z-index:100;top:0;left:0;width:var(--scroll-progress,0%);height:2px;background:var(--accent);pointer-events:none}
+.reveal{opacity:0;transform:translateY(34px);transition:opacity .9s var(--motion-ease),transform 1s var(--motion-ease);will-change:opacity,transform}
+.reveal.is-visible{opacity:1;transform:none}
+.reveal-left{opacity:0;transform:translateX(-32px);transition:opacity .9s var(--motion-ease),transform 1s var(--motion-ease)}
+.reveal-left.is-visible{opacity:1;transform:none}
+.reveal-scale{opacity:0;transform:scale(.965);transition:opacity 1s var(--motion-ease),transform 1.15s var(--motion-ease);overflow:hidden}
+.reveal-scale.is-visible{opacity:1;transform:scale(1)}
+.lead-photo img,.photo-pair img,.hero-visual img{transform:scale(1.045);transition:transform 1.4s var(--motion-ease),filter .8s ease}
+.reveal-scale.is-visible img{transform:scale(1)}
+.lead-photo:hover img,.photo-pair>div:hover img{transform:scale(1.035)}
+.day-index .dayno{opacity:0;transform:translateX(-24px);transition:opacity 1.1s var(--motion-ease),transform 1.1s var(--motion-ease)}
+.day-index.is-visible .dayno{opacity:1;transform:none}
+.timeline .event,.timeline .time{opacity:0;transform:translateY(18px);transition:opacity .72s var(--motion-ease),transform .72s var(--motion-ease)}
+.timeline.is-visible .event,.timeline.is-visible .time{opacity:1;transform:none}
+.timeline.is-visible .event:nth-child(2),.timeline.is-visible .time:nth-child(1){transition-delay:.05s}
+.timeline.is-visible .event:nth-child(4),.timeline.is-visible .time:nth-child(3){transition-delay:.14s}
+.timeline.is-visible .event:nth-child(6),.timeline.is-visible .time:nth-child(5){transition-delay:.23s}
+.timeline.is-visible .event:nth-child(8),.timeline.is-visible .time:nth-child(7){transition-delay:.32s}
+.timeline.is-visible .event:nth-child(10),.timeline.is-visible .time:nth-child(9){transition-delay:.41s}
+.route-node{opacity:0;transform:translateY(22px);transition:opacity .75s var(--motion-ease),transform .75s var(--motion-ease)}
+.route-strip.is-visible .route-node{opacity:1;transform:none}
+.route-strip.is-visible .route-node:nth-child(1){transition-delay:.04s}.route-strip.is-visible .route-node:nth-child(2){transition-delay:.12s}.route-strip.is-visible .route-node:nth-child(3){transition-delay:.20s}.route-strip.is-visible .route-node:nth-child(4){transition-delay:.28s}.route-strip.is-visible .route-node:nth-child(5){transition-delay:.36s}
+.chapter .chapter-grid>*{opacity:0;transform:translateY(28px);transition:opacity .95s var(--motion-ease),transform 1s var(--motion-ease)}
+.chapter.is-visible .chapter-grid>*{opacity:1;transform:none}
+.chapter.is-visible .chapter-grid>:nth-child(2){transition-delay:.14s}
+.section-head{position:relative}
+.section-head::before{content:"";position:absolute;left:0;bottom:-1px;width:0;height:1px;background:var(--accent);transition:width 1s var(--motion-ease)}
+.section-head.is-visible::before{width:115px}
+.practical-card{transition:transform .35s ease,box-shadow .35s ease}
+.practical-card:hover{transform:translateY(-5px)}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}.reveal,.reveal-left,.reveal-scale,.day-index .dayno,.timeline .event,.timeline .time,.route-node,.chapter .chapter-grid>*{opacity:1!important;transform:none!important}}
+</style>
 </head>
 <body>
 
@@ -351,8 +387,8 @@ body {
   </div>
   <div class="hero-visual">
     <div class="label">WINTER / JAPAN</div>
-    <div class="sea"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Okinawa-kumejima_Hatenohama_Beach-xl.jpg/1280px-Okinawa-kumejima_Hatenohama_Beach-xl.jpg" alt="Okinawa coast"></div>
-    <div class="snow"><img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7f/Hida_Takayama_old_town_streets_%2848519369712%29.jpg/1280px-Hida_Takayama_old_town_streets_%2848519369712%29.jpg?utm_source=commons.wikimedia.org" alt="Takayama snow town"></div>
+    <div class="sea"><img src="https://unsplash.com/photos/2dVug7wClQ0/download?force=true&w=1800&q=85" alt="Okinawa coast"></div>
+    <div class="snow"><img src="https://unsplash.com/photos/6XyQTCtJ3Qs/download?force=true&w=1800&q=85" alt="Takayama snow town"></div>
   </div>
 </header>
 
@@ -397,7 +433,7 @@ body {
 <section class="day" id="d1">
 <div class="day-grid"><aside class="day-index"><div class="dayno">01</div><div class="date">JAN 29 · FRI</div><h2>出發。</h2><p>高雄 → 沖繩<br>先讓海風把旅行打開。</p></aside>
 <main class="day-main">
-<div class="lead-photo"><img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f0/Kokusai-dori01ss4272.jpg/1280px-Kokusai-dori01ss4272.jpg?utm_source=commons.wikimedia.org" alt="Okinawa"></div>
+<div class="lead-photo"><img src="https://p16-lemon8-va-sign.tiktokcdn-us.com/tos-maliva-v-ac5634-us/4b8727a0cb8d479fa440f11ff5781c1d~tplv-tej9nj120t-text-logo%3AQHl1bWlyYXJhMzE5%3Aq75.jpeg?lk3s=c7f08e79&source=lemon8_seo&x-expires=1777204800&x-signature=4JOuQdb2XWbocCZQo12YG%2FgrjF0%3D" alt="Okinawa"></div>
 <div class="caption">OKINAWA / FIRST LIGHT</div>
 <div class="timeline">
 <div class="time">17:15</div><div class="event"><strong>JX362 · KHH → OKA</strong><p>高雄國際機場出發，飛往那霸。</p><a class="mapbtn" href="https://www.google.com/maps/search/?api=1&query=Naha+Airport" target="_blank">MAP ↗</a></div>
@@ -409,7 +445,7 @@ body {
 <section class="day" id="d2">
 <div class="day-grid"><aside class="day-index"><div class="dayno">02</div><div class="date">JAN 30 · SAT</div><h2>向北。</h2><p>沖繩 → 名古屋 → 高山<br>一天完成氣候切換。</p></aside>
 <main class="day-main">
-<div class="lead-photo"><img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9a/Hida-Takayama_Miyagawa_Morning_Market_%2815668520238%29.jpg/1280px-Hida-Takayama_Miyagawa_Morning_Market_%2815668520238%29.jpg?utm_source=commons.wikimedia.org" alt="Takayama winter"></div>
+<div class="lead-photo"><img src="https://unsplash.com/photos/6XyQTCtJ3Qs/download?force=true&w=1800&q=85" alt="Takayama winter"></div>
 <div class="caption">TAKAYAMA / SNOW ARRIVAL</div>
 <div class="timeline">
 <div class="time">09:55</div><div class="event"><strong>BC552 · OKA → NGO</strong><p>上午飛往中部國際機場。</p></div>
@@ -428,7 +464,7 @@ body {
 <section class="day" id="d3">
 <div class="day-grid"><aside class="day-index"><div class="dayno">03</div><div class="date">JAN 31 · SUN</div><h2>白川鄉。</h2><p>雪屋、合掌造、冬季點燈。</p></aside>
 <main class="day-main">
-<div class="lead-photo"><img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/8/84/Shirakawa-go_winter_%2851815452116%29.jpg/1280px-Shirakawa-go_winter_%2851815452116%29.jpg?utm_source=commons.wikimedia.org" alt="Shirakawa-go winter"></div>
+<div class="lead-photo"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Shirakawa-go_001.jpg/1600px-Shirakawa-go_001.jpg" alt="Shirakawa-go winter"></div>
 <div class="caption">SHIRAKAWA-GO / WINTER LIGHT-UP</div>
 <div class="timeline">
 <div class="time">14:50</div><div class="event"><strong>Nohi Bus Center</strong><p>集合，準備前往白川鄉。</p></div>
@@ -442,7 +478,7 @@ body {
 <section class="day" id="d4">
 <div class="day-grid"><aside class="day-index"><div class="dayno">04</div><div class="date">FEB 01 · MON</div><h2>慢慢逛。</h2><p>高山完整散步日。</p></aside>
 <main class="day-main">
-<div class="photo-pair"><div><img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7f/Hida_Takayama_old_town_streets_%2848519369712%29.jpg/1280px-Hida_Takayama_old_town_streets_%2848519369712%29.jpg?utm_source=commons.wikimedia.org" alt="Takayama street"></div><div><img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8d/Takayama_Jinya.jpg/1280px-Takayama_Jinya.jpg?utm_source=commons.wikimedia.org" alt="Takayama houses"></div></div>
+<div class="photo-pair"><div><img src="https://unsplash.com/photos/OpxKM8WDoUE/download?force=true&w=1800&q=85" alt="Takayama street"></div><div><img src="https://unsplash.com/photos/6XyQTCtJ3Qs/download?force=true&w=1800&q=85" alt="Takayama houses"></div></div>
 <div class="timeline">
 <div class="time">08:00</div><div class="event"><strong>宮川朝市</strong><p>冬季早晨從市場開始。</p></div>
 <div class="time">上午</div><div class="event"><strong>三町古街・中橋・高山陣屋</strong><p>木造街景、老店、飛驒牛一路慢慢走。</p></div>
@@ -454,7 +490,7 @@ body {
 <section class="day" id="d5">
 <div class="day-grid"><aside class="day-index"><div class="dayno">05</div><div class="date">FEB 02 · TUE</div><h2>離開雪。</h2><p>高山 → 名古屋。</p></aside>
 <main class="day-main">
-<div class="lead-photo"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Nagoya_skyline.jpg/1280px-Nagoya_skyline.jpg" alt="Nagoya city and mountains"></div>
+<div class="lead-photo"><img src="https://cdn.japan-travel-note.com/images/00396/02.jpg" alt="Nagoya city and mountains"></div>
 <div class="caption">NAGOYA / CITY MEETS MOUNTAINS</div>
 <div class="timeline">
 <div class="time">上午</div><div class="event"><strong>JR Hida 高山 → 名古屋</strong><p>窗外從雪山逐漸切換成城市。</p></div>
@@ -465,7 +501,7 @@ body {
 <section class="day" id="d6">
 <div class="day-grid"><aside class="day-index"><div class="dayno">06</div><div class="date">FEB 03 · WED</div><h2>名古屋。</h2><p>歷史、商店街與夜景。</p></aside>
 <main class="day-main">
-<div class="lead-photo"><img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3b/Nagoya_Castle.jpg/1280px-Nagoya_Castle.jpg?utm_source=commons.wikimedia.org" alt="Nagoya winter"></div>
+<div class="lead-photo"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Nagoya_skyline.jpg/1600px-Nagoya_skyline.jpg" alt="Nagoya winter"></div>
 <div class="caption">NAGOYA / OLD × NEW</div>
 <div class="timeline">
 <div class="time">上午</div><div class="event"><strong>名古屋城</strong><p>先看城市的歷史骨架。</p></div>
@@ -478,7 +514,7 @@ body {
 <section class="day" id="d7">
 <div class="day-grid"><aside class="day-index"><div class="dayno">07</div><div class="date">FEB 04 · THU</div><h2>吉卜力日。</h2><p>整天留給森林裡的故事。</p></aside>
 <main class="day-main">
-<div class="lead-photo"><img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/2/28/Entrance_of_Ghibli%E2%80%99s_Grand_Warehouse_-_1.jpg/1280px-Entrance_of_Ghibli%E2%80%99s_Grand_Warehouse_-_1.jpg?utm_source=commons.wikimedia.org" alt="Ghibli Park"></div>
+<div class="lead-photo"><img src="https://ghibli-park.jp/site/img/info/20260807-2/img03.webp" alt="Ghibli Park"></div>
 <div class="caption">GHIBLI PARK / AICHI</div>
 <div class="timeline">
 <div class="time">全天</div><div class="event"><strong>Ghibli Park</strong><p>已排定整天，不另外塞名古屋景點。</p><span class="tag">RESERVATION</span></div>
@@ -489,7 +525,7 @@ body {
 <section class="day" id="d8">
 <div class="day-grid"><aside class="day-index"><div class="dayno">08</div><div class="date">FEB 05 · FRI</div><h2>神社與燈海。</h2><p>白天安靜，晚上發光。</p></aside>
 <main class="day-main">
-<div class="lead-photo"><img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2f/Nabana_no_Sato_Illumination.jpg/1280px-Nabana_no_Sato_Illumination.jpg?utm_source=commons.wikimedia.org" alt="Nabana no Sato illumination"></div>
+<div class="lead-photo"><img src="https://img.travesiasdigital.com/cdn-cgi/image/quality%3D90%2Cformat%3Dauto%2Conerror%3Dredirect/2019/10/nabana-no-sato.jpg" alt="Nabana no Sato illumination"></div>
 <div class="caption">NABANA NO SATO / NIGHT LIGHTS</div>
 <div class="timeline">
 <div class="time">上午</div><div class="event"><strong>熱田神宮</strong><p>從城市裡的一段安靜開始。</p></div>
@@ -519,7 +555,7 @@ body {
 <section class="day" id="d10">
 <div class="day-grid"><aside class="day-index"><div class="dayno">10</div><div class="date">FEB 07 · SUN</div><h2>回到沖繩。</h2><p>名古屋 → 那霸。</p></aside>
 <main class="day-main">
-<div class="lead-photo"><img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/9/93/Kouri_Bridge_and_the_beach_20191109a.jpg/1280px-Kouri_Bridge_and_the_beach_20191109a.jpg?utm_source=commons.wikimedia.org" alt="Kouri Bridge and the beach"></div>
+<div class="lead-photo"><img src="https://unsplash.com/photos/fkHgJta1130/download?force=true&w=1800&q=85" alt="Kouri Bridge and the beach"></div>
 <div class="caption">OKINAWA / SECOND CHAPTER</div>
 <div class="timeline">
 <div class="time">17:25</div><div class="event"><strong>BC557 · NGO → OKA</strong><p>離開名古屋，回到島上。</p></div>
@@ -541,7 +577,7 @@ body {
 <section class="day" id="d12">
 <div class="day-grid"><aside class="day-index"><div class="dayno">12</div><div class="date">FEB 09 · TUE</div><h2>向北。</h2><p>租車 DAY 01<br>美ら海・備瀨・古宇利。</p></aside>
 <main class="day-main">
-<div class="lead-photo"><img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2b/Okinawa_Churaumi_Aquarium.jpg/1280px-Okinawa_Churaumi_Aquarium.jpg?utm_source=commons.wikimedia.org" alt="Okinawa winter beach"></div>
+<div class="lead-photo"><img src="https://oki-churaumi.jp/ba/area/the-greatsea/images/main.jpg" alt="Okinawa winter beach"></div>
 <div class="caption">NORTH OKINAWA / ROAD TRIP</div>
 <div class="timeline">
 <div class="time">上午</div><div class="event"><strong>那霸 → 北部</strong><p>租車出發，沿海岸線北上。</p></div>
@@ -553,7 +589,7 @@ body {
 
 <section class="day" id="d13">
 <div class="day-grid"><aside class="day-index"><div class="dayno">13</div><div class="date">FEB 10 · WED</div><h2>城市與夕陽。</h2><p>租車 DAY 02。</p></aside>
-<main class="day-main"><div class="lead-photo"><img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c2/American_Village_in_Okinawa.jpg/1280px-American_Village_in_Okinawa.jpg?utm_source=commons.wikimedia.org" alt="American Village"></div><div class="caption">AMERICAN VILLAGE / OKINAWA</div>
+<main class="day-main"><div class="lead-photo"><img src="https://unsplash.com/photos/vwhAW5XrFI4/download?force=true&w=1800&q=85" alt="American Village"></div><div class="caption">AMERICAN VILLAGE / OKINAWA</div>
 
 <div class="timeline">
 <div class="time">上午</div><div class="event"><strong>American Village</strong><p>海邊街區、雜貨與咖啡。</p></div>
@@ -565,7 +601,7 @@ body {
 <section class="day" id="d14">
 <div class="day-grid"><aside class="day-index"><div class="dayno">14</div><div class="date">FEB 11 · THU</div><h2>最後一頁。</h2><p>行李在車上，景點不用塞滿。</p></aside>
 <main class="day-main">
-<div class="lead-photo"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1d/Shuri_Castle_%2839423426765%29.jpg/1280px-Shuri_Castle_%2839423426765%29.jpg" alt="Shuri Castle"></div>
+<div class="lead-photo"><img src="https://unsplash.com/photos/9ZPlpXeU_RQ/download?force=true&w=1800&q=85" alt="Shuri Castle"></div>
 <div class="caption">OKINAWA → KAOHSIUNG / END</div>
 <div class="timeline">
 <div class="time">上午</div><div class="event"><strong>Check-out</strong><p>行李留在車上，開始最後半日。</p></div>
@@ -629,5 +665,24 @@ body {
 </p>
 </footer>
 
+
+<script>
+(()=>{
+ const root=document.documentElement;
+ const update=()=>{const max=root.scrollHeight-innerHeight;root.style.setProperty('--scroll-progress',(max>0?scrollY/max*100:0)+'%')};
+ update(); addEventListener('scroll',update,{passive:true});
+ const add=(sel,cls)=>document.querySelectorAll(sel).forEach(e=>e.classList.add(cls));
+ add('.section-head,.overview-grid > *,.factlist,.route-strip,.timeline,.day-note,.practical-card,.chapter','reveal');
+ add('.day-index','.reveal-left');
+ add('.lead-photo,.photo-pair,.hero-visual','reveal-scale');
+ const targets=document.querySelectorAll('.reveal,.reveal-left,.reveal-scale');
+ const io=new IntersectionObserver(entries=>entries.forEach(x=>{if(x.isIntersecting){x.target.classList.add('is-visible');io.unobserve(x.target)}}),{threshold:.14,rootMargin:'0px 0px -8% 0px'});
+ targets.forEach(e=>io.observe(e));
+ if(!matchMedia('(prefers-reduced-motion: reduce)').matches){
+   const hero=document.querySelector('.hero-visual'),img=document.querySelector('.hero-visual .sea img');
+   if(hero&&img){const parallax=()=>{const r=hero.getBoundingClientRect();const y=Math.max(-18,Math.min(18,(innerHeight/2-(r.top+r.height/2))*.03));img.style.transform=`translateY(${y}px) scale(1.02)`};parallax();addEventListener('scroll',parallax,{passive:true})}
+ }
+})();
+</script>
 </body>
 </html>
