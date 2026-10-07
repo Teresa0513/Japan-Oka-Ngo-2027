@@ -42,7 +42,7 @@ img{display:block;width:100%;height:100%;object-fit:cover}
 .meta small{font-size:11px;letter-spacing:.18em;color:var(--muted)}
 .hero-visual{position:relative;overflow:hidden;background:#d7d5cf}
 .hero-visual .sea{position:absolute;inset:0 0 38% 0}
-.hero-visual .snow{position:absolute;left:0;right:0;bottom:0;height:44%;border-top:7px solid var(--paper);clip-path:polygon(0 17%,100% 0,100% 100%,0 100%);overflow:hidden}
+.hero-visual .snow{position:absolute;left:0;right:0;bottom:0;height:45%;clip-path:polygon(0 8%,100% 0,100% 100%,0 100%);overflow:hidden}
 .hero-visual .label{position:absolute;right:28px;top:30px;z-index:4;writing-mode:vertical-rl;letter-spacing:.22em;font-size:10px;color:white;text-shadow:0 1px 8px rgba(0,0,0,.4)}
 .hero-visual:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.12),transparent 35%,transparent 70%,rgba(0,0,0,.18));pointer-events:none}
 .section{padding:120px 8vw}
@@ -144,6 +144,7 @@ img{display:block;width:100%;height:100%;object-fit:cover}
 </style>
 
 <style>
+.day{content-visibility:auto;contain-intrinsic-size:900px;}
 .lead-photo img,.photo-pair img,.hero-visual img{
   filter:saturate(.92) contrast(.96);
 }
@@ -336,9 +337,9 @@ body::before{content:"";position:fixed;z-index:100;top:0;left:0;width:var(--scro
 .reveal.is-visible{opacity:1;transform:none}
 .reveal-left{opacity:0;transform:translateX(-32px);transition:opacity .9s var(--motion-ease),transform 1s var(--motion-ease)}
 .reveal-left.is-visible{opacity:1;transform:none}
-.reveal-scale{opacity:0;transform:scale(.965);transition:opacity 1s var(--motion-ease),transform 1.15s var(--motion-ease);overflow:hidden}
+.reveal-scale{opacity:0;transform:scale(.985);transition:opacity 1s var(--motion-ease),transform 1.15s var(--motion-ease);overflow:hidden}
 .reveal-scale.is-visible{opacity:1;transform:scale(1)}
-.lead-photo img,.photo-pair img,.hero-visual img{transform:scale(1.045);transition:transform 1.4s var(--motion-ease),filter .8s ease}
+.lead-photo img,.photo-pair img,.hero-visual img{transform:scale(1.02);transition:transform 1.4s var(--motion-ease),filter .8s ease}
 .reveal-scale.is-visible img{transform:scale(1)}
 .lead-photo:hover img,.photo-pair>div:hover img{transform:scale(1.035)}
 .day-index .dayno{opacity:0;transform:translateX(-24px);transition:opacity 1.1s var(--motion-ease),transform 1.1s var(--motion-ease)}
@@ -365,18 +366,6 @@ body::before{content:"";position:fixed;z-index:100;top:0;left:0;width:var(--scro
 </style>
 </head>
 <body>
-<script>
-document.addEventListener("error", function (event) {
-  const img = event.target;
-  if (img && img.tagName === "IMG" && img.src.includes("/output/") && !img.dataset.retry) {
-    img.dataset.retry = "1";
-    const file = img.src.split("/output/").pop();
-    img.src = "./output/" + file;
-  }
-}, true);
-</script>
-
-
 <nav class="topbar">
   <div class="brand">TERESA'S JOURNAL / 2027</div>
   <div class="toplinks">
@@ -398,8 +387,8 @@ document.addEventListener("error", function (event) {
   </div>
   <div class="hero-visual">
     <div class="label">WINTER / JAPAN</div>
-    <div class="sea"><img src="./output/hero-okinawa.jpg" alt="Okinawa coast"></div>
-    <div class="snow"><img src="./output/hero-takayama-snow.jpg" alt="Takayama snow town"></div>
+    <div class="sea"><img src="./output/hero-okinawa.jpg" alt="Okinawa coast" loading="eager" decoding="async" fetchpriority="high"></div>
+    <div class="snow"><img src="./output/hero-takayama-snow.jpg" alt="Takayama snow town" loading="eager" decoding="async" fetchpriority="high"></div>
   </div>
 </header>
 
@@ -444,7 +433,7 @@ document.addEventListener("error", function (event) {
 <section class="day" id="d1">
 <div class="day-grid"><aside class="day-index"><div class="dayno">01</div><div class="date">JAN 29 · FRI</div><h2>出發。</h2><p>高雄 → 沖繩<br>先讓海風把旅行打開。</p></aside>
 <main class="day-main">
-<div class="lead-photo"><img src="./output/d01-okinawa-naha.jpg" alt="Okinawa"></div>
+<div class="lead-photo"><img src="./output/d01-okinawa-naha.jpg" alt="Okinawa" loading="lazy" decoding="async"></div>
 <div class="caption">OKINAWA / FIRST LIGHT</div>
 <div class="timeline">
 <div class="time">17:15</div><div class="event"><strong>JX362 · KHH → OKA</strong><p>高雄國際機場出發，飛往那霸。</p><a class="mapbtn" href="https://www.google.com/maps/search/?api=1&query=Naha+Airport" target="_blank">MAP ↗</a></div>
@@ -456,7 +445,7 @@ document.addEventListener("error", function (event) {
 <section class="day" id="d2">
 <div class="day-grid"><aside class="day-index"><div class="dayno">02</div><div class="date">JAN 30 · SAT</div><h2>向北。</h2><p>沖繩 → 名古屋 → 高山<br>一天完成氣候切換。</p></aside>
 <main class="day-main">
-<div class="lead-photo"><img src="./output/d02-takayama-winter.jpg" alt="Takayama winter"></div>
+<div class="lead-photo"><img src="./output/d02-takayama-winter.jpg" alt="Takayama winter" loading="lazy" decoding="async"></div>
 <div class="caption">TAKAYAMA / SNOW ARRIVAL</div>
 <div class="timeline">
 <div class="time">09:55</div><div class="event"><strong>BC552 · OKA → NGO</strong><p>上午飛往中部國際機場。</p></div>
@@ -475,7 +464,7 @@ document.addEventListener("error", function (event) {
 <section class="day" id="d3">
 <div class="day-grid"><aside class="day-index"><div class="dayno">03</div><div class="date">JAN 31 · SUN</div><h2>白川鄉。</h2><p>雪屋、合掌造、冬季點燈。</p></aside>
 <main class="day-main">
-<div class="lead-photo"><img src="./output/d03-shirakawago-lightup.jpg" alt="Shirakawa-go winter"></div>
+<div class="lead-photo"><img src="./output/d03-shirakawago-lightup.jpg" alt="Shirakawa-go winter" loading="lazy" decoding="async"></div>
 <div class="caption">SHIRAKAWA-GO / WINTER LIGHT-UP</div>
 <div class="timeline">
 <div class="time">14:50</div><div class="event"><strong>Nohi Bus Center</strong><p>集合，準備前往白川鄉。</p></div>
@@ -489,7 +478,7 @@ document.addEventListener("error", function (event) {
 <section class="day" id="d4">
 <div class="day-grid"><aside class="day-index"><div class="dayno">04</div><div class="date">FEB 01 · MON</div><h2>慢慢逛。</h2><p>高山完整散步日。</p></aside>
 <main class="day-main">
-<div class="photo-pair"><div><img src="./output/d04-takayama-oldtown.jpg" alt="Takayama street"></div><div><img src="./output/d04-takayama-snowstreet.jpg" alt="Takayama houses"></div></div>
+<div class="photo-pair"><div><img src="./output/d04-takayama-oldtown.jpg" alt="Takayama street" loading="lazy" decoding="async"></div><div><img src="./output/d04-takayama-snowstreet.jpg" alt="Takayama houses" loading="lazy" decoding="async"></div></div>
 <div class="timeline">
 <div class="time">08:00</div><div class="event"><strong>宮川朝市</strong><p>冬季早晨從市場開始。</p></div>
 <div class="time">上午</div><div class="event"><strong>三町古街・中橋・高山陣屋</strong><p>木造街景、老店、飛驒牛一路慢慢走。</p></div>
@@ -501,7 +490,7 @@ document.addEventListener("error", function (event) {
 <section class="day" id="d5">
 <div class="day-grid"><aside class="day-index"><div class="dayno">05</div><div class="date">FEB 02 · TUE</div><h2>離開雪。</h2><p>高山 → 名古屋。</p></aside>
 <main class="day-main">
-<div class="lead-photo"><img src="./output/d05-nagoya-arrival.jpg" alt="Nagoya city and mountains"></div>
+<div class="lead-photo"><img src="./output/d05-nagoya-arrival.jpg" alt="Nagoya city and mountains" loading="lazy" decoding="async"></div>
 <div class="caption">NAGOYA / CITY MEETS MOUNTAINS</div>
 <div class="timeline">
 <div class="time">上午</div><div class="event"><strong>JR Hida 高山 → 名古屋</strong><p>窗外從雪山逐漸切換成城市。</p></div>
@@ -512,7 +501,7 @@ document.addEventListener("error", function (event) {
 <section class="day" id="d6">
 <div class="day-grid"><aside class="day-index"><div class="dayno">06</div><div class="date">FEB 03 · WED</div><h2>名古屋。</h2><p>歷史、商店街與夜景。</p></aside>
 <main class="day-main">
-<div class="lead-photo"><img src="./output/d06-nagoya-night.jpg" alt="Nagoya winter"></div>
+<div class="lead-photo"><img src="./output/d06-nagoya-night.jpg" alt="Nagoya winter" loading="lazy" decoding="async"></div>
 <div class="caption">NAGOYA / OLD × NEW</div>
 <div class="timeline">
 <div class="time">上午</div><div class="event"><strong>名古屋城</strong><p>先看城市的歷史骨架。</p></div>
@@ -525,7 +514,7 @@ document.addEventListener("error", function (event) {
 <section class="day" id="d7">
 <div class="day-grid"><aside class="day-index"><div class="dayno">07</div><div class="date">FEB 04 · THU</div><h2>吉卜力日。</h2><p>整天留給森林裡的故事。</p></aside>
 <main class="day-main">
-<div class="lead-photo"><img src="./output/d07-ghibli-park.jpg" alt="Ghibli Park"></div>
+<div class="lead-photo"><img src="./output/d07-ghibli-park.jpg" alt="Ghibli Park" loading="lazy" decoding="async"></div>
 <div class="caption">GHIBLI PARK / AICHI</div>
 <div class="timeline">
 <div class="time">全天</div><div class="event"><strong>Ghibli Park</strong><p>已排定整天，不另外塞名古屋景點。</p><span class="tag">RESERVATION</span></div>
@@ -536,7 +525,7 @@ document.addEventListener("error", function (event) {
 <section class="day" id="d8">
 <div class="day-grid"><aside class="day-index"><div class="dayno">08</div><div class="date">FEB 05 · FRI</div><h2>神社與燈海。</h2><p>白天安靜，晚上發光。</p></aside>
 <main class="day-main">
-<div class="lead-photo"><img src="./output/d08-nabana-illumination.jpg" alt="Nabana no Sato illumination"></div>
+<div class="lead-photo"><img src="./output/d08-nabana-illumination.jpg" alt="Nabana no Sato illumination" loading="lazy" decoding="async"></div>
 <div class="caption">NABANA NO SATO / NIGHT LIGHTS</div>
 <div class="timeline">
 <div class="time">上午</div><div class="event"><strong>熱田神宮</strong><p>從城市裡的一段安靜開始。</p></div>
@@ -566,7 +555,7 @@ document.addEventListener("error", function (event) {
 <section class="day" id="d10">
 <div class="day-grid"><aside class="day-index"><div class="dayno">10</div><div class="date">FEB 07 · SUN</div><h2>回到沖繩。</h2><p>名古屋 → 那霸。</p></aside>
 <main class="day-main">
-<div class="lead-photo"><img src="./output/d10-okinawa-return.jpg" alt="Kouri Bridge and the beach"></div>
+<div class="lead-photo"><img src="./output/d10-okinawa-return.jpg" alt="Kouri Bridge and the beach" loading="lazy" decoding="async"></div>
 <div class="caption">OKINAWA / SECOND CHAPTER</div>
 <div class="timeline">
 <div class="time">17:25</div><div class="event"><strong>BC557 · NGO → OKA</strong><p>離開名古屋，回到島上。</p></div>
@@ -577,7 +566,7 @@ document.addEventListener("error", function (event) {
 <section class="day" id="d11">
 <div class="day-grid"><aside class="day-index"><div class="dayno">11</div><div class="date">FEB 08 · MON</div><h2>不用開車。</h2><p>那霸市區慢慢走。</p></aside>
 <main class="day-main">
-<div class="lead-photo"><img src="./output/d11-naha-shuri.jpg" alt="首里城正殿"></div>
+<div class="lead-photo"><img src="./output/d11-naha-shuri.jpg" alt="首里城正殿" loading="lazy" decoding="async"></div>
 <div class="caption">SHURIJO CASTLE / NAHA</div>
 <div class="timeline">
 <div class="time">上午</div><div class="event"><strong>首里城</strong><p>搭單軌與步行完成。</p></div>
@@ -590,7 +579,7 @@ document.addEventListener("error", function (event) {
 <section class="day" id="d12">
 <div class="day-grid"><aside class="day-index"><div class="dayno">12</div><div class="date">FEB 09 · TUE</div><h2>向北。</h2><p>租車 DAY 01<br>美ら海・備瀨・古宇利。</p></aside>
 <main class="day-main">
-<div class="lead-photo"><img src="./output/d12-churaumi-kouri.jpg" alt="Okinawa winter beach"></div>
+<div class="lead-photo"><img src="./output/d12-churaumi-kouri.jpg" alt="Okinawa winter beach" loading="lazy" decoding="async"></div>
 <div class="caption">NORTH OKINAWA / ROAD TRIP</div>
 <div class="timeline">
 <div class="time">上午</div><div class="event"><strong>那霸 → 北部</strong><p>租車出發，沿海岸線北上。</p></div>
@@ -602,7 +591,7 @@ document.addEventListener("error", function (event) {
 
 <section class="day" id="d13">
 <div class="day-grid"><aside class="day-index"><div class="dayno">13</div><div class="date">FEB 10 · WED</div><h2>城市與夕陽。</h2><p>租車 DAY 02。</p></aside>
-<main class="day-main"><div class="lead-photo"><img src="./output/d13-americanvillage-sunset.jpg" alt="American Village"></div><div class="caption">AMERICAN VILLAGE / OKINAWA</div>
+<main class="day-main"><div class="lead-photo"><img src="./output/d13-americanvillage-sunset.jpg" alt="American Village" loading="lazy" decoding="async"></div><div class="caption">AMERICAN VILLAGE / OKINAWA</div>
 
 <div class="timeline">
 <div class="time">上午</div><div class="event"><strong>American Village</strong><p>海邊街區、雜貨與咖啡。</p></div>
@@ -614,7 +603,7 @@ document.addEventListener("error", function (event) {
 <section class="day" id="d14">
 <div class="day-grid"><aside class="day-index"><div class="dayno">14</div><div class="date">FEB 11 · THU</div><h2>最後一頁。</h2><p>行李在車上，景點不用塞滿。</p></aside>
 <main class="day-main">
-<div class="lead-photo"><img src="./output/d14-okinawa-lastday.jpg" alt="Shuri Castle"></div>
+<div class="lead-photo"><img src="./output/d14-okinawa-lastday.jpg" alt="Shuri Castle" loading="lazy" decoding="async"></div>
 <div class="caption">OKINAWA → KAOHSIUNG / END</div>
 <div class="timeline">
 <div class="time">上午</div><div class="event"><strong>Check-out</strong><p>行李留在車上，開始最後半日。</p></div>
