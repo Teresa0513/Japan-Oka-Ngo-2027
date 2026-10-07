@@ -364,7 +364,7 @@ body::before{content:"";position:fixed;z-index:100;top:0;left:0;width:var(--scro
 .practical-card:hover{transform:translateY(-5px)}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}.reveal,.reveal-left,.reveal-scale,.day-index .dayno,.timeline .event,.timeline .time,.route-node,.chapter .chapter-grid>*{opacity:1!important;transform:none!important}}
 </style>
-<style>
+
 /* ===== Editorial photo entrance effects ===== */
 .photo-motion{
   position:relative;
@@ -447,9 +447,55 @@ body::before{content:"";position:fixed;z-index:100;top:0;left:0;width:var(--scro
   .photo-motion.motion-play,
   .photo-motion.motion-play img{animation:none!important}
 }
+
+<style>
+/* ===== Mobile spacing + loading polish ===== */
+@media (max-width:520px){
+  .day{
+    padding:58px 6vw 78px;
+  }
+
+  .day-grid{
+    gap:12px;
+  }
+
+  .day-index .date{
+    margin-top:16px;
+    margin-bottom:8px;
+    font-size:16px;
+    line-height:1.35;
+  }
+
+  .day-index h2{
+    margin:6px 0 8px;
+    font-size:34px;
+    line-height:1.22;
+  }
+
+  .day-index p{
+    margin:0 0 18px;
+    line-height:1.65;
+  }
+
+  .lead-photo{
+    height:58vw;
+    min-height:230px;
+    margin-bottom:22px;
+  }
+
+  .photo-pair{
+    margin:18px 0 22px;
+  }
+
+  .day-note{
+    margin-top:20px;
+  }
+}
 </style>
-  
-<link rel="preload" as="image" href="./output/hero-okinawa.webp" fetchpriority="high">
+<style>
+.lead-photo img,.photo-pair img,.hero-visual img{display:block;width:100%;height:100%;object-fit:cover}
+</style>
+<link rel="preload" as="image" href="./output/hero-okinawa-1600w.webp" fetchpriority="high">
 </head>
 <body>
 <nav class="topbar">
@@ -473,8 +519,8 @@ body::before{content:"";position:fixed;z-index:100;top:0;left:0;width:var(--scro
   </div>
   <div class="hero-visual">
     <div class="label">WINTER / JAPAN</div>
-    <div class="sea"><img src="./output/hero-okinawa.webp" alt="Okinawa coast" decoding="async" loading="eager" fetchpriority="high"></div>
-    <div class="snow"><img src="./output/hero-takayama-snow.webp" alt="Takayama snow town" loading="lazy" decoding="async" fetchpriority="low"></div>
+    <div class="sea"><picture><source type="image/webp" srcset="./output/hero-okinawa-1200w.webp 1200w, ./output/hero-okinawa-1600w.webp 1600w" sizes="50vw"><img src="./output/hero-okinawa.jpg" alt="Okinawa coast" loading="eager" decoding="async" fetchpriority="high"></picture></div>
+    <div class="snow"><picture><source type="image/webp" srcset="./output/hero-takayama-snow-1200w.webp 1200w, ./output/hero-takayama-snow-1600w.webp 1600w" sizes="50vw"><img src="./output/hero-takayama-snow.jpg" alt="Takayama snow town" loading="eager" decoding="async" fetchpriority="high"></picture></div>
   </div>
 </header>
 
@@ -519,7 +565,7 @@ body::before{content:"";position:fixed;z-index:100;top:0;left:0;width:var(--scro
 <section class="day" id="d1">
 <div class="day-grid"><aside class="day-index"><div class="dayno">01</div><div class="date">JAN 29 · FRI</div><h2>出發。</h2><p>高雄 → 沖繩<br>先讓海風把旅行打開。</p></aside>
 <main class="day-main">
-<div class="lead-photo"><img src="./output/d01-okinawa-naha.webp" alt="Okinawa" loading="lazy" decoding="async" fetchpriority="low"></div>
+<div class="lead-photo"><picture><source type="image/webp" srcset="./output/d01-okinawa-naha-800w.webp 800w, ./output/d01-okinawa-naha-1200w.webp 1200w" sizes="(max-width: 520px) 88vw, 100vw"><img src="./output/d01-okinawa-naha.jpg" alt="Okinawa" loading="lazy" decoding="async" fetchpriority="low"></picture></div>
 <div class="caption">OKINAWA / FIRST LIGHT</div>
 <div class="timeline">
 <div class="time">17:15</div><div class="event"><strong>JX362 · KHH → OKA</strong><p>高雄國際機場出發，飛往那霸。</p><a class="mapbtn" href="https://www.google.com/maps/search/?api=1&query=Naha+Airport" target="_blank">MAP ↗</a></div>
@@ -531,7 +577,7 @@ body::before{content:"";position:fixed;z-index:100;top:0;left:0;width:var(--scro
 <section class="day" id="d2">
 <div class="day-grid"><aside class="day-index"><div class="dayno">02</div><div class="date">JAN 30 · SAT</div><h2>向北。</h2><p>沖繩 → 名古屋 → 高山<br>一天完成氣候切換。</p></aside>
 <main class="day-main">
-<div class="lead-photo"><img src="./output/d02-takayama-winter.webp" alt="Takayama winter" loading="lazy" decoding="async" fetchpriority="low"></div>
+<div class="lead-photo"><picture><source type="image/webp" srcset="./output/d02-takayama-winter-800w.webp 800w, ./output/d02-takayama-winter-1200w.webp 1200w" sizes="(max-width: 520px) 88vw, 100vw"><img src="./output/d02-takayama-winter.jpg" alt="Takayama winter" loading="lazy" decoding="async" fetchpriority="low"></picture></div>
 <div class="caption">TAKAYAMA / SNOW ARRIVAL</div>
 <div class="timeline">
 <div class="time">09:55</div><div class="event"><strong>BC552 · OKA → NGO</strong><p>上午飛往中部國際機場。</p></div>
@@ -550,7 +596,7 @@ body::before{content:"";position:fixed;z-index:100;top:0;left:0;width:var(--scro
 <section class="day" id="d3">
 <div class="day-grid"><aside class="day-index"><div class="dayno">03</div><div class="date">JAN 31 · SUN</div><h2>白川鄉。</h2><p>雪屋、合掌造、冬季點燈。</p></aside>
 <main class="day-main">
-<div class="lead-photo"><img src="./output/d03-shirakawago-lightup.webp" alt="Shirakawa-go winter" loading="lazy" decoding="async" fetchpriority="low"></div>
+<div class="lead-photo"><picture><source type="image/webp" srcset="./output/d03-shirakawago-lightup-800w.webp 800w, ./output/d03-shirakawago-lightup-1200w.webp 1200w" sizes="(max-width: 520px) 88vw, 100vw"><img src="./output/d03-shirakawago-lightup.jpg" alt="Shirakawa-go winter" loading="lazy" decoding="async" fetchpriority="low"></picture></div>
 <div class="caption">SHIRAKAWA-GO / WINTER LIGHT-UP</div>
 <div class="timeline">
 <div class="time">14:50</div><div class="event"><strong>Nohi Bus Center</strong><p>集合，準備前往白川鄉。</p></div>
@@ -564,7 +610,7 @@ body::before{content:"";position:fixed;z-index:100;top:0;left:0;width:var(--scro
 <section class="day" id="d4">
 <div class="day-grid"><aside class="day-index"><div class="dayno">04</div><div class="date">FEB 01 · MON</div><h2>慢慢逛。</h2><p>高山完整散步日。</p></aside>
 <main class="day-main">
-<div class="photo-pair"><div><img src="./output/d04-takayama-oldtown.webp" alt="Takayama street" loading="lazy" decoding="async" fetchpriority="low"></div><div><img src="./output/d04-takayama-snowstreet.webp" alt="Takayama houses" loading="lazy" decoding="async" fetchpriority="low"></div></div>
+<div class="photo-pair"><div><picture><source type="image/webp" srcset="./output/d04-takayama-oldtown-800w.webp 800w, ./output/d04-takayama-oldtown-1200w.webp 1200w" sizes="(max-width: 520px) 88vw, 100vw"><img src="./output/d04-takayama-oldtown.jpg" alt="Takayama street" loading="lazy" decoding="async" fetchpriority="low"></picture></div><div><picture><source type="image/webp" srcset="./output/d04-takayama-snowstreet-800w.webp 800w, ./output/d04-takayama-snowstreet-1200w.webp 1200w" sizes="(max-width: 520px) 88vw, 100vw"><img src="./output/d04-takayama-snowstreet.jpg" alt="Takayama houses" loading="lazy" decoding="async" fetchpriority="low"></picture></div></div>
 <div class="timeline">
 <div class="time">08:00</div><div class="event"><strong>宮川朝市</strong><p>冬季早晨從市場開始。</p></div>
 <div class="time">上午</div><div class="event"><strong>三町古街・中橋・高山陣屋</strong><p>木造街景、老店、飛驒牛一路慢慢走。</p></div>
@@ -576,7 +622,7 @@ body::before{content:"";position:fixed;z-index:100;top:0;left:0;width:var(--scro
 <section class="day" id="d5">
 <div class="day-grid"><aside class="day-index"><div class="dayno">05</div><div class="date">FEB 02 · TUE</div><h2>離開雪。</h2><p>高山 → 名古屋。</p></aside>
 <main class="day-main">
-<div class="lead-photo"><img src="./output/d05-nagoya-arrival.webp" alt="Nagoya city and mountains" loading="lazy" decoding="async" fetchpriority="low"></div>
+<div class="lead-photo"><picture><source type="image/webp" srcset="./output/d05-nagoya-arrival-800w.webp 800w, ./output/d05-nagoya-arrival-1200w.webp 1200w" sizes="(max-width: 520px) 88vw, 100vw"><img src="./output/d05-nagoya-arrival.jpg" alt="Nagoya city and mountains" loading="lazy" decoding="async" fetchpriority="low"></picture></div>
 <div class="caption">NAGOYA / CITY MEETS MOUNTAINS</div>
 <div class="timeline">
 <div class="time">上午</div><div class="event"><strong>JR Hida 高山 → 名古屋</strong><p>窗外從雪山逐漸切換成城市。</p></div>
@@ -587,7 +633,7 @@ body::before{content:"";position:fixed;z-index:100;top:0;left:0;width:var(--scro
 <section class="day" id="d6">
 <div class="day-grid"><aside class="day-index"><div class="dayno">06</div><div class="date">FEB 03 · WED</div><h2>名古屋。</h2><p>歷史、商店街與夜景。</p></aside>
 <main class="day-main">
-<div class="lead-photo"><img src="./output/d06-nagoya-night.webp" alt="Nagoya winter" loading="lazy" decoding="async" fetchpriority="low"></div>
+<div class="lead-photo"><picture><source type="image/webp" srcset="./output/d06-nagoya-night-800w.webp 800w, ./output/d06-nagoya-night-1200w.webp 1200w" sizes="(max-width: 520px) 88vw, 100vw"><img src="./output/d06-nagoya-night.jpg" alt="Nagoya winter" loading="lazy" decoding="async" fetchpriority="low"></picture></div>
 <div class="caption">NAGOYA / OLD × NEW</div>
 <div class="timeline">
 <div class="time">上午</div><div class="event"><strong>名古屋城</strong><p>先看城市的歷史骨架。</p></div>
@@ -600,7 +646,7 @@ body::before{content:"";position:fixed;z-index:100;top:0;left:0;width:var(--scro
 <section class="day" id="d7">
 <div class="day-grid"><aside class="day-index"><div class="dayno">07</div><div class="date">FEB 04 · THU</div><h2>吉卜力日。</h2><p>整天留給森林裡的故事。</p></aside>
 <main class="day-main">
-<div class="lead-photo"><img src="./output/d07-ghibli-park.webp" alt="Ghibli Park" loading="lazy" decoding="async" fetchpriority="low"></div>
+<div class="lead-photo"><picture><source type="image/webp" srcset="./output/d07-ghibli-park-800w.webp 800w, ./output/d07-ghibli-park-1200w.webp 1200w" sizes="(max-width: 520px) 88vw, 100vw"><img src="./output/d07-ghibli-park.jpg" alt="Ghibli Park" loading="lazy" decoding="async" fetchpriority="low"></picture></div>
 <div class="caption">GHIBLI PARK / AICHI</div>
 <div class="timeline">
 <div class="time">全天</div><div class="event"><strong>Ghibli Park</strong><p>已排定整天，不另外塞名古屋景點。</p><span class="tag">RESERVATION</span></div>
@@ -611,7 +657,7 @@ body::before{content:"";position:fixed;z-index:100;top:0;left:0;width:var(--scro
 <section class="day" id="d8">
 <div class="day-grid"><aside class="day-index"><div class="dayno">08</div><div class="date">FEB 05 · FRI</div><h2>神社與燈海。</h2><p>白天安靜，晚上發光。</p></aside>
 <main class="day-main">
-<div class="lead-photo"><img src="./output/d08-nabana-illumination.webp" alt="Nabana no Sato illumination" loading="lazy" decoding="async" fetchpriority="low"></div>
+<div class="lead-photo"><picture><source type="image/webp" srcset="./output/d08-nabana-illumination-800w.webp 800w, ./output/d08-nabana-illumination-1200w.webp 1200w" sizes="(max-width: 520px) 88vw, 100vw"><img src="./output/d08-nabana-illumination.jpg" alt="Nabana no Sato illumination" loading="lazy" decoding="async" fetchpriority="low"></picture></div>
 <div class="caption">NABANA NO SATO / NIGHT LIGHTS</div>
 <div class="timeline">
 <div class="time">上午</div><div class="event"><strong>熱田神宮</strong><p>從城市裡的一段安靜開始。</p></div>
@@ -641,7 +687,7 @@ body::before{content:"";position:fixed;z-index:100;top:0;left:0;width:var(--scro
 <section class="day" id="d10">
 <div class="day-grid"><aside class="day-index"><div class="dayno">10</div><div class="date">FEB 07 · SUN</div><h2>回到沖繩。</h2><p>名古屋 → 那霸。</p></aside>
 <main class="day-main">
-<div class="lead-photo"><img src="./output/d10-okinawa-return.webp" alt="Kouri Bridge and the beach" loading="lazy" decoding="async" fetchpriority="low"></div>
+<div class="lead-photo"><picture><source type="image/webp" srcset="./output/d10-okinawa-return-800w.webp 800w, ./output/d10-okinawa-return-1200w.webp 1200w" sizes="(max-width: 520px) 88vw, 100vw"><img src="./output/d10-okinawa-return.jpg" alt="Kouri Bridge and the beach" loading="lazy" decoding="async" fetchpriority="low"></picture></div>
 <div class="caption">OKINAWA / SECOND CHAPTER</div>
 <div class="timeline">
 <div class="time">17:25</div><div class="event"><strong>BC557 · NGO → OKA</strong><p>離開名古屋，回到島上。</p></div>
@@ -652,7 +698,7 @@ body::before{content:"";position:fixed;z-index:100;top:0;left:0;width:var(--scro
 <section class="day" id="d11">
 <div class="day-grid"><aside class="day-index"><div class="dayno">11</div><div class="date">FEB 08 · MON</div><h2>不用開車。</h2><p>那霸市區慢慢走。</p></aside>
 <main class="day-main">
-<div class="lead-photo"><img src="./output/d11-naha-shuri.webp" alt="首里城正殿" loading="lazy" decoding="async" fetchpriority="low"></div>
+<div class="lead-photo"><picture><source type="image/webp" srcset="./output/d11-naha-shuri-800w.webp 800w, ./output/d11-naha-shuri-1200w.webp 1200w" sizes="(max-width: 520px) 88vw, 100vw"><img src="./output/d11-naha-shuri.jpg" alt="首里城正殿" loading="lazy" decoding="async" fetchpriority="low"></picture></div>
 <div class="caption">SHURIJO CASTLE / NAHA</div>
 <div class="timeline">
 <div class="time">上午</div><div class="event"><strong>首里城</strong><p>搭單軌與步行完成。</p></div>
@@ -665,7 +711,7 @@ body::before{content:"";position:fixed;z-index:100;top:0;left:0;width:var(--scro
 <section class="day" id="d12">
 <div class="day-grid"><aside class="day-index"><div class="dayno">12</div><div class="date">FEB 09 · TUE</div><h2>向北。</h2><p>租車 DAY 01<br>美ら海・備瀨・古宇利。</p></aside>
 <main class="day-main">
-<div class="lead-photo"><img src="./output/d12-churaumi-kouri.webp" alt="Okinawa winter beach" loading="lazy" decoding="async" fetchpriority="low"></div>
+<div class="lead-photo"><picture><source type="image/webp" srcset="./output/d12-churaumi-kouri-800w.webp 800w, ./output/d12-churaumi-kouri-1200w.webp 1200w" sizes="(max-width: 520px) 88vw, 100vw"><img src="./output/d12-churaumi-kouri.jpg" alt="Okinawa winter beach" loading="lazy" decoding="async" fetchpriority="low"></picture></div>
 <div class="caption">NORTH OKINAWA / ROAD TRIP</div>
 <div class="timeline">
 <div class="time">上午</div><div class="event"><strong>那霸 → 北部</strong><p>租車出發，沿海岸線北上。</p></div>
@@ -677,7 +723,7 @@ body::before{content:"";position:fixed;z-index:100;top:0;left:0;width:var(--scro
 
 <section class="day" id="d13">
 <div class="day-grid"><aside class="day-index"><div class="dayno">13</div><div class="date">FEB 10 · WED</div><h2>城市與夕陽。</h2><p>租車 DAY 02。</p></aside>
-<main class="day-main"><div class="lead-photo"><img src="./output/d13-americanvillage-sunset.webp" alt="American Village" loading="lazy" decoding="async" fetchpriority="low"></div><div class="caption">AMERICAN VILLAGE / OKINAWA</div>
+<main class="day-main"><div class="lead-photo"><picture><source type="image/webp" srcset="./output/d13-americanvillage-sunset-800w.webp 800w, ./output/d13-americanvillage-sunset-1200w.webp 1200w" sizes="(max-width: 520px) 88vw, 100vw"><img src="./output/d13-americanvillage-sunset.jpg" alt="American Village" loading="lazy" decoding="async" fetchpriority="low"></picture></div><div class="caption">AMERICAN VILLAGE / OKINAWA</div>
 
 <div class="timeline">
 <div class="time">上午</div><div class="event"><strong>American Village</strong><p>海邊街區、雜貨與咖啡。</p></div>
@@ -689,7 +735,7 @@ body::before{content:"";position:fixed;z-index:100;top:0;left:0;width:var(--scro
 <section class="day" id="d14">
 <div class="day-grid"><aside class="day-index"><div class="dayno">14</div><div class="date">FEB 11 · THU</div><h2>最後一頁。</h2><p>行李在車上，景點不用塞滿。</p></aside>
 <main class="day-main">
-<div class="lead-photo"><img src="./output/d14-okinawa-lastday.webp" alt="Shuri Castle" loading="lazy" decoding="async" fetchpriority="low"></div>
+<div class="lead-photo"><picture><source type="image/webp" srcset="./output/d14-okinawa-lastday-800w.webp 800w, ./output/d14-okinawa-lastday-1200w.webp 1200w" sizes="(max-width: 520px) 88vw, 100vw"><img src="./output/d14-okinawa-lastday.jpg" alt="Shuri Castle" loading="lazy" decoding="async" fetchpriority="low"></picture></div>
 <div class="caption">OKINAWA → KAOHSIUNG / END</div>
 <div class="timeline">
 <div class="time">上午</div><div class="event"><strong>Check-out</strong><p>行李留在車上，開始最後半日。</p></div>
@@ -772,49 +818,6 @@ body::before{content:"";position:fixed;z-index:100;top:0;left:0;width:var(--scro
  }
 })();
 </script>
-
-/* ===== Mobile spacing + loading polish ===== */
-@media (max-width:520px){
-  .day{
-    padding:58px 6vw 78px;
-  }
-
-  .day-grid{
-    gap:12px;
-  }
-
-  .day-index .date{
-    margin-top:16px;
-    margin-bottom:8px;
-    font-size:16px;
-    line-height:1.35;
-  }
-
-  .day-index h2{
-    margin:6px 0 8px;
-    font-size:34px;
-    line-height:1.22;
-  }
-
-  .day-index p{
-    margin:0 0 18px;
-    line-height:1.65;
-  }
-
-  .lead-photo{
-    height:58vw;
-    min-height:230px;
-    margin-bottom:22px;
-  }
-
-  .photo-pair{
-    margin:18px 0 22px;
-  }
-
-  .day-note{
-    margin-top:20px;
-  }
-}
 
 </body>
 </html>
