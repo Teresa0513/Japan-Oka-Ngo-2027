@@ -337,47 +337,11 @@ body::before{content:"";position:fixed;z-index:100;top:0;left:0;width:var(--scro
 .reveal.is-visible{opacity:1;transform:none}
 .reveal-left{opacity:0;transform:translateX(-32px);transition:opacity .9s var(--motion-ease),transform 1s var(--motion-ease)}
 .reveal-left.is-visible{opacity:1;transform:none}
-.reveal-scale{opacity:0;transform:translateY(24px);transition:opacity .9s var(--motion-ease),transform 1s var(--motion-ease);overflow:hidden;will-change:transform,opacity,clip-path}
-.reveal-scale.is-visible{opacity:1;transform:none}
-.lead-photo img,.photo-pair img,.hero-visual img{transform:scale(1.02);transition:transform 1.5s var(--motion-ease),filter 1s ease}
+.reveal-scale{opacity:0;transform:scale(.985);transition:opacity 1s var(--motion-ease),transform 1.15s var(--motion-ease);overflow:hidden}
+.reveal-scale.is-visible{opacity:1;transform:scale(1)}
+.lead-photo img,.photo-pair img,.hero-visual img{transform:scale(1.02);transition:transform 1.4s var(--motion-ease),filter .8s ease}
 .reveal-scale.is-visible img{transform:scale(1)}
 .lead-photo:hover img,.photo-pair>div:hover img{transform:scale(1.035)}
-
-/* Editorial image entrances: each photo gets a different reveal, but all stay restrained. */
-.reveal-scale.fx-curtain{clip-path:inset(0 100% 0 0);transform:none;opacity:1;transition:clip-path 1.15s cubic-bezier(.22,.8,.22,1)}
-.reveal-scale.fx-curtain.is-visible{clip-path:inset(0 0 0 0)}
-.reveal-scale.fx-curtain img{transform:scale(1.08) translateX(2%);transition:transform 1.45s var(--motion-ease)}
-.reveal-scale.fx-curtain.is-visible img{transform:scale(1)}
-
-.reveal-scale.fx-rise{clip-path:inset(12% 0 0 0);transform:translateY(42px);transition:clip-path 1s var(--motion-ease),transform 1s var(--motion-ease),opacity .8s ease}
-.reveal-scale.fx-rise.is-visible{clip-path:inset(0);transform:none}
-.reveal-scale.fx-rise img{transform:scale(1.06) translateY(20px);transition:transform 1.35s var(--motion-ease)}
-.reveal-scale.fx-rise.is-visible img{transform:scale(1)}
-
-.reveal-scale.fx-focus{transform:scale(.97);filter:blur(5px);opacity:.35;transition:opacity 1.1s ease,transform 1.15s var(--motion-ease),filter 1.15s ease}
-.reveal-scale.fx-focus.is-visible{transform:scale(1);filter:blur(0);opacity:1}
-.reveal-scale.fx-focus img{transform:scale(1.07);transition:transform 1.5s var(--motion-ease)}
-.reveal-scale.fx-focus.is-visible img{transform:scale(1)}
-
-.reveal-scale.fx-pan{transform:translateX(-46px);clip-path:inset(0 0 0 7%);transition:transform 1s var(--motion-ease),clip-path 1s var(--motion-ease),opacity .8s ease}
-.reveal-scale.fx-pan.is-visible{transform:none;clip-path:inset(0)}
-.reveal-scale.fx-pan img{transform:scale(1.06) translateX(28px);transition:transform 1.6s var(--motion-ease)}
-.reveal-scale.fx-pan.is-visible img{transform:scale(1) translateX(0)}
-
-.reveal-scale.fx-slice{clip-path:polygon(0 0,100% 0,100% 0,0 0);transition:clip-path 1.15s cubic-bezier(.2,.78,.2,1),opacity .7s ease}
-.reveal-scale.fx-slice.is-visible{clip-path:polygon(0 0,100% 0,100% 100%,0 100%)}
-.reveal-scale.fx-slice img{transform:scale(1.06);transition:transform 1.5s var(--motion-ease)}
-.reveal-scale.fx-slice.is-visible img{transform:scale(1)}
-
-.reveal-scale.fx-wipe{clip-path:inset(0 0 0 100%);transition:clip-path 1.1s cubic-bezier(.2,.8,.2,1),opacity .8s ease}
-.reveal-scale.fx-wipe.is-visible{clip-path:inset(0)}
-.reveal-scale.fx-wipe img{transform:scale(1.07) translateX(-18px);transition:transform 1.45s var(--motion-ease)}
-.reveal-scale.fx-wipe.is-visible img{transform:scale(1) translateX(0)}
-
-@media (prefers-reduced-motion: reduce){
-  .reveal-scale,.reveal-scale.fx-curtain,.reveal-scale.fx-rise,.reveal-scale.fx-focus,.reveal-scale.fx-pan,.reveal-scale.fx-slice,.reveal-scale.fx-wipe{opacity:1!important;transform:none!important;clip-path:none!important;filter:none!important;transition:none!important}
-  .reveal-scale img{transform:none!important;transition:none!important}
-}
 .day-index .dayno{opacity:0;transform:translateX(-24px);transition:opacity 1.1s var(--motion-ease),transform 1.1s var(--motion-ease)}
 .day-index.is-visible .dayno{opacity:1;transform:none}
 .timeline .event,.timeline .time{opacity:0;transform:translateY(18px);transition:opacity .72s var(--motion-ease),transform .72s var(--motion-ease)}
@@ -400,6 +364,90 @@ body::before{content:"";position:fixed;z-index:100;top:0;left:0;width:var(--scro
 .practical-card:hover{transform:translateY(-5px)}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}.reveal,.reveal-left,.reveal-scale,.day-index .dayno,.timeline .event,.timeline .time,.route-node,.chapter .chapter-grid>*{opacity:1!important;transform:none!important}}
 </style>
+
+/* ===== Editorial photo entrance effects ===== */
+.photo-motion{
+  position:relative;
+  overflow:hidden;
+}
+.photo-motion img{
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  will-change:transform,filter,clip-path;
+}
+
+/* Images remain visible by default. The animation is only applied when JS
+   adds .motion-play, so a script/browser issue can never make the photos vanish. */
+.photo-motion.fx-curtain.motion-play{animation:photoCurtain 1.05s cubic-bezier(.22,.8,.22,1) both}
+.photo-motion.fx-rise.motion-play{animation:photoRise .95s cubic-bezier(.22,.61,.36,1) both}
+.photo-motion.fx-focus.motion-play{animation:photoFocus 1.15s cubic-bezier(.22,.61,.36,1) both}
+.photo-motion.fx-pan.motion-play{animation:photoPan 1.05s cubic-bezier(.22,.61,.36,1) both}
+.photo-motion.fx-slice.motion-play{animation:photoSlice 1.0s cubic-bezier(.22,.8,.22,1) both}
+.photo-motion.fx-wipe.motion-play{animation:photoWipe 1.0s cubic-bezier(.22,.8,.22,1) both}
+
+.photo-motion.fx-curtain.motion-play img{animation:photoCurtainImg 1.25s cubic-bezier(.22,.61,.36,1) both}
+.photo-motion.fx-rise.motion-play img{animation:photoRiseImg 1.2s cubic-bezier(.22,.61,.36,1) both}
+.photo-motion.fx-focus.motion-play img{animation:photoFocusImg 1.35s cubic-bezier(.22,.61,.36,1) both}
+.photo-motion.fx-pan.motion-play img{animation:photoPanImg 1.35s cubic-bezier(.22,.61,.36,1) both}
+.photo-motion.fx-slice.motion-play img{animation:photoSliceImg 1.25s cubic-bezier(.22,.61,.36,1) both}
+.photo-motion.fx-wipe.motion-play img{animation:photoWipeImg 1.25s cubic-bezier(.22,.61,.36,1) both}
+
+@keyframes photoCurtain{
+  from{clip-path:inset(0 100% 0 0)}
+  to{clip-path:inset(0 0 0 0)}
+}
+@keyframes photoCurtainImg{
+  from{transform:scale(1.08) translateX(3%)}
+  to{transform:scale(1)}
+}
+@keyframes photoRise{
+  from{clip-path:inset(16% 0 0 0);transform:translateY(34px)}
+  to{clip-path:inset(0);transform:none}
+}
+@keyframes photoRiseImg{
+  from{transform:scale(1.06) translateY(18px)}
+  to{transform:scale(1)}
+}
+@keyframes photoFocus{
+  from{filter:blur(5px);transform:scale(.97)}
+  to{filter:blur(0);transform:scale(1)}
+}
+@keyframes photoFocusImg{
+  from{transform:scale(1.08)}
+  to{transform:scale(1)}
+}
+@keyframes photoPan{
+  from{clip-path:inset(0 0 0 14%);transform:translateX(30px)}
+  to{clip-path:inset(0);transform:none}
+}
+@keyframes photoPanImg{
+  from{transform:scale(1.06) translateX(-2%)}
+  to{transform:scale(1)}
+}
+@keyframes photoSlice{
+  from{clip-path:inset(0 0 100% 0)}
+  to{clip-path:inset(0)}
+}
+@keyframes photoSliceImg{
+  from{transform:scale(1.06) translateY(-2%)}
+  to{transform:scale(1)}
+}
+@keyframes photoWipe{
+  from{clip-path:inset(0 0 0 100%)}
+  to{clip-path:inset(0)}
+}
+@keyframes photoWipeImg{
+  from{transform:scale(1.07) translateX(2%)}
+  to{transform:scale(1)}
+}
+
+@media (prefers-reduced-motion:reduce){
+  .photo-motion.motion-play,
+  .photo-motion.motion-play img{animation:none!important}
+}
+
 </head>
 <body>
 <nav class="topbar">
@@ -423,8 +471,8 @@ body::before{content:"";position:fixed;z-index:100;top:0;left:0;width:var(--scro
   </div>
   <div class="hero-visual">
     <div class="label">WINTER / JAPAN</div>
-    <div class="sea"><img src="./output/hero-okinawa.webp" alt="Okinawa coast" loading="eager" decoding="async" fetchpriority="high" width="2400" height="1600" onerror="this.onerror=null;this.src='./output/hero-okinawa.jpg'"></div>
-    <div class="snow"><img src="./output/hero-takayama-snow.webp" alt="Takayama snow town" loading="eager" decoding="async" fetchpriority="high" width="2400" height="1600" onerror="this.onerror=null;this.src='./output/hero-takayama-snow.jpg'"></div>
+    <div class="sea"><img src="./output/hero-okinawa.jpg" alt="Okinawa coast" loading="eager" decoding="async" fetchpriority="high"></div>
+    <div class="snow"><img src="./output/hero-takayama-snow.jpg" alt="Takayama snow town" loading="lazy" decoding="async" fetchpriority="low"></div>
   </div>
 </header>
 
@@ -469,7 +517,7 @@ body::before{content:"";position:fixed;z-index:100;top:0;left:0;width:var(--scro
 <section class="day" id="d1">
 <div class="day-grid"><aside class="day-index"><div class="dayno">01</div><div class="date">JAN 29 · FRI</div><h2>出發。</h2><p>高雄 → 沖繩<br>先讓海風把旅行打開。</p></aside>
 <main class="day-main">
-<div class="lead-photo"><img src="./output/d01-okinawa-naha.webp" alt="Okinawa" loading="lazy" decoding="async" fetchpriority="low" width="2000" height="1333" onerror="this.onerror=null;this.src='./output/d01-okinawa-naha.jpg'"></div>
+<div class="lead-photo"><img src="./output/d01-okinawa-naha.jpg" alt="Okinawa" loading="lazy" decoding="async" fetchpriority="low"></div>
 <div class="caption">OKINAWA / FIRST LIGHT</div>
 <div class="timeline">
 <div class="time">17:15</div><div class="event"><strong>JX362 · KHH → OKA</strong><p>高雄國際機場出發，飛往那霸。</p><a class="mapbtn" href="https://www.google.com/maps/search/?api=1&query=Naha+Airport" target="_blank">MAP ↗</a></div>
@@ -481,7 +529,7 @@ body::before{content:"";position:fixed;z-index:100;top:0;left:0;width:var(--scro
 <section class="day" id="d2">
 <div class="day-grid"><aside class="day-index"><div class="dayno">02</div><div class="date">JAN 30 · SAT</div><h2>向北。</h2><p>沖繩 → 名古屋 → 高山<br>一天完成氣候切換。</p></aside>
 <main class="day-main">
-<div class="lead-photo"><img src="./output/d02-takayama-winter.webp" alt="Takayama winter" loading="lazy" decoding="async" fetchpriority="low" width="2000" height="1333" onerror="this.onerror=null;this.src='./output/d02-takayama-winter.jpg'"></div>
+<div class="lead-photo"><img src="./output/d02-takayama-winter.jpg" alt="Takayama winter" loading="lazy" decoding="async" fetchpriority="low"></div>
 <div class="caption">TAKAYAMA / SNOW ARRIVAL</div>
 <div class="timeline">
 <div class="time">09:55</div><div class="event"><strong>BC552 · OKA → NGO</strong><p>上午飛往中部國際機場。</p></div>
@@ -500,7 +548,7 @@ body::before{content:"";position:fixed;z-index:100;top:0;left:0;width:var(--scro
 <section class="day" id="d3">
 <div class="day-grid"><aside class="day-index"><div class="dayno">03</div><div class="date">JAN 31 · SUN</div><h2>白川鄉。</h2><p>雪屋、合掌造、冬季點燈。</p></aside>
 <main class="day-main">
-<div class="lead-photo"><img src="./output/d03-shirakawago-lightup.webp" alt="Shirakawa-go winter" loading="lazy" decoding="async" fetchpriority="low" width="2000" height="1333" onerror="this.onerror=null;this.src='./output/d03-shirakawago-lightup.jpg'"></div>
+<div class="lead-photo"><img src="./output/d03-shirakawago-lightup.jpg" alt="Shirakawa-go winter" loading="lazy" decoding="async" fetchpriority="low"></div>
 <div class="caption">SHIRAKAWA-GO / WINTER LIGHT-UP</div>
 <div class="timeline">
 <div class="time">14:50</div><div class="event"><strong>Nohi Bus Center</strong><p>集合，準備前往白川鄉。</p></div>
@@ -514,7 +562,7 @@ body::before{content:"";position:fixed;z-index:100;top:0;left:0;width:var(--scro
 <section class="day" id="d4">
 <div class="day-grid"><aside class="day-index"><div class="dayno">04</div><div class="date">FEB 01 · MON</div><h2>慢慢逛。</h2><p>高山完整散步日。</p></aside>
 <main class="day-main">
-<div class="photo-pair"><div><img src="./output/d04-takayama-oldtown.webp" alt="Takayama street" loading="lazy" decoding="async" fetchpriority="low" width="2000" height="1333" onerror="this.onerror=null;this.src='./output/d04-takayama-oldtown.jpg'"></div><div><img src="./output/d04-takayama-snowstreet.webp" alt="Takayama houses" loading="lazy" decoding="async" fetchpriority="low" width="2000" height="1333" onerror="this.onerror=null;this.src='./output/d04-takayama-snowstreet.jpg'"></div></div>
+<div class="photo-pair"><div><img src="./output/d04-takayama-oldtown.jpg" alt="Takayama street" loading="lazy" decoding="async" fetchpriority="low"></div><div><img src="./output/d04-takayama-snowstreet.jpg" alt="Takayama houses" loading="lazy" decoding="async" fetchpriority="low"></div></div>
 <div class="timeline">
 <div class="time">08:00</div><div class="event"><strong>宮川朝市</strong><p>冬季早晨從市場開始。</p></div>
 <div class="time">上午</div><div class="event"><strong>三町古街・中橋・高山陣屋</strong><p>木造街景、老店、飛驒牛一路慢慢走。</p></div>
@@ -526,7 +574,7 @@ body::before{content:"";position:fixed;z-index:100;top:0;left:0;width:var(--scro
 <section class="day" id="d5">
 <div class="day-grid"><aside class="day-index"><div class="dayno">05</div><div class="date">FEB 02 · TUE</div><h2>離開雪。</h2><p>高山 → 名古屋。</p></aside>
 <main class="day-main">
-<div class="lead-photo"><img src="./output/d05-nagoya-arrival.webp" alt="Nagoya city and mountains" loading="lazy" decoding="async" fetchpriority="low" width="2000" height="1333" onerror="this.onerror=null;this.src='./output/d05-nagoya-arrival.jpg'"></div>
+<div class="lead-photo"><img src="./output/d05-nagoya-arrival.jpg" alt="Nagoya city and mountains" loading="lazy" decoding="async" fetchpriority="low"></div>
 <div class="caption">NAGOYA / CITY MEETS MOUNTAINS</div>
 <div class="timeline">
 <div class="time">上午</div><div class="event"><strong>JR Hida 高山 → 名古屋</strong><p>窗外從雪山逐漸切換成城市。</p></div>
@@ -537,7 +585,7 @@ body::before{content:"";position:fixed;z-index:100;top:0;left:0;width:var(--scro
 <section class="day" id="d6">
 <div class="day-grid"><aside class="day-index"><div class="dayno">06</div><div class="date">FEB 03 · WED</div><h2>名古屋。</h2><p>歷史、商店街與夜景。</p></aside>
 <main class="day-main">
-<div class="lead-photo"><img src="./output/d06-nagoya-night.webp" alt="Nagoya winter" loading="lazy" decoding="async" fetchpriority="low" width="2000" height="1333" onerror="this.onerror=null;this.src='./output/d06-nagoya-night.jpg'"></div>
+<div class="lead-photo"><img src="./output/d06-nagoya-night.jpg" alt="Nagoya winter" loading="lazy" decoding="async" fetchpriority="low"></div>
 <div class="caption">NAGOYA / OLD × NEW</div>
 <div class="timeline">
 <div class="time">上午</div><div class="event"><strong>名古屋城</strong><p>先看城市的歷史骨架。</p></div>
@@ -550,7 +598,7 @@ body::before{content:"";position:fixed;z-index:100;top:0;left:0;width:var(--scro
 <section class="day" id="d7">
 <div class="day-grid"><aside class="day-index"><div class="dayno">07</div><div class="date">FEB 04 · THU</div><h2>吉卜力日。</h2><p>整天留給森林裡的故事。</p></aside>
 <main class="day-main">
-<div class="lead-photo"><img src="./output/d07-ghibli-park.webp" alt="Ghibli Park" loading="lazy" decoding="async" fetchpriority="low" width="2000" height="1333" onerror="this.onerror=null;this.src='./output/d07-ghibli-park.jpg'"></div>
+<div class="lead-photo"><img src="./output/d07-ghibli-park.jpg" alt="Ghibli Park" loading="lazy" decoding="async" fetchpriority="low"></div>
 <div class="caption">GHIBLI PARK / AICHI</div>
 <div class="timeline">
 <div class="time">全天</div><div class="event"><strong>Ghibli Park</strong><p>已排定整天，不另外塞名古屋景點。</p><span class="tag">RESERVATION</span></div>
@@ -561,7 +609,7 @@ body::before{content:"";position:fixed;z-index:100;top:0;left:0;width:var(--scro
 <section class="day" id="d8">
 <div class="day-grid"><aside class="day-index"><div class="dayno">08</div><div class="date">FEB 05 · FRI</div><h2>神社與燈海。</h2><p>白天安靜，晚上發光。</p></aside>
 <main class="day-main">
-<div class="lead-photo"><img src="./output/d08-nabana-illumination.webp" alt="Nabana no Sato illumination" loading="lazy" decoding="async" fetchpriority="low" width="2000" height="1333" onerror="this.onerror=null;this.src='./output/d08-nabana-illumination.jpg'"></div>
+<div class="lead-photo"><img src="./output/d08-nabana-illumination.jpg" alt="Nabana no Sato illumination" loading="lazy" decoding="async" fetchpriority="low"></div>
 <div class="caption">NABANA NO SATO / NIGHT LIGHTS</div>
 <div class="timeline">
 <div class="time">上午</div><div class="event"><strong>熱田神宮</strong><p>從城市裡的一段安靜開始。</p></div>
@@ -591,7 +639,7 @@ body::before{content:"";position:fixed;z-index:100;top:0;left:0;width:var(--scro
 <section class="day" id="d10">
 <div class="day-grid"><aside class="day-index"><div class="dayno">10</div><div class="date">FEB 07 · SUN</div><h2>回到沖繩。</h2><p>名古屋 → 那霸。</p></aside>
 <main class="day-main">
-<div class="lead-photo"><img src="./output/d10-okinawa-return.webp" alt="Kouri Bridge and the beach" loading="lazy" decoding="async" fetchpriority="low" width="2000" height="1333" onerror="this.onerror=null;this.src='./output/d10-okinawa-return.jpg'"></div>
+<div class="lead-photo"><img src="./output/d10-okinawa-return.jpg" alt="Kouri Bridge and the beach" loading="lazy" decoding="async" fetchpriority="low"></div>
 <div class="caption">OKINAWA / SECOND CHAPTER</div>
 <div class="timeline">
 <div class="time">17:25</div><div class="event"><strong>BC557 · NGO → OKA</strong><p>離開名古屋，回到島上。</p></div>
@@ -602,7 +650,7 @@ body::before{content:"";position:fixed;z-index:100;top:0;left:0;width:var(--scro
 <section class="day" id="d11">
 <div class="day-grid"><aside class="day-index"><div class="dayno">11</div><div class="date">FEB 08 · MON</div><h2>不用開車。</h2><p>那霸市區慢慢走。</p></aside>
 <main class="day-main">
-<div class="lead-photo"><img src="./output/d11-naha-shuri.webp" alt="首里城正殿" loading="lazy" decoding="async" fetchpriority="low" width="2000" height="1333" onerror="this.onerror=null;this.src='./output/d11-naha-shuri.jpg'"></div>
+<div class="lead-photo"><img src="./output/d11-naha-shuri.jpg" alt="首里城正殿" loading="lazy" decoding="async" fetchpriority="low"></div>
 <div class="caption">SHURIJO CASTLE / NAHA</div>
 <div class="timeline">
 <div class="time">上午</div><div class="event"><strong>首里城</strong><p>搭單軌與步行完成。</p></div>
@@ -615,7 +663,7 @@ body::before{content:"";position:fixed;z-index:100;top:0;left:0;width:var(--scro
 <section class="day" id="d12">
 <div class="day-grid"><aside class="day-index"><div class="dayno">12</div><div class="date">FEB 09 · TUE</div><h2>向北。</h2><p>租車 DAY 01<br>美ら海・備瀨・古宇利。</p></aside>
 <main class="day-main">
-<div class="lead-photo"><img src="./output/d12-churaumi-kouri.webp" alt="Okinawa winter beach" loading="lazy" decoding="async" fetchpriority="low" width="2000" height="1333" onerror="this.onerror=null;this.src='./output/d12-churaumi-kouri.jpg'"></div>
+<div class="lead-photo"><img src="./output/d12-churaumi-kouri.jpg" alt="Okinawa winter beach" loading="lazy" decoding="async" fetchpriority="low"></div>
 <div class="caption">NORTH OKINAWA / ROAD TRIP</div>
 <div class="timeline">
 <div class="time">上午</div><div class="event"><strong>那霸 → 北部</strong><p>租車出發，沿海岸線北上。</p></div>
@@ -627,7 +675,7 @@ body::before{content:"";position:fixed;z-index:100;top:0;left:0;width:var(--scro
 
 <section class="day" id="d13">
 <div class="day-grid"><aside class="day-index"><div class="dayno">13</div><div class="date">FEB 10 · WED</div><h2>城市與夕陽。</h2><p>租車 DAY 02。</p></aside>
-<main class="day-main"><div class="lead-photo"><img src="./output/d13-americanvillage-sunset.webp" alt="American Village" loading="lazy" decoding="async" fetchpriority="low" width="2000" height="1333" onerror="this.onerror=null;this.src='./output/d13-americanvillage-sunset.jpg'"></div><div class="caption">AMERICAN VILLAGE / OKINAWA</div>
+<main class="day-main"><div class="lead-photo"><img src="./output/d13-americanvillage-sunset.jpg" alt="American Village" loading="lazy" decoding="async" fetchpriority="low"></div><div class="caption">AMERICAN VILLAGE / OKINAWA</div>
 
 <div class="timeline">
 <div class="time">上午</div><div class="event"><strong>American Village</strong><p>海邊街區、雜貨與咖啡。</p></div>
@@ -639,7 +687,7 @@ body::before{content:"";position:fixed;z-index:100;top:0;left:0;width:var(--scro
 <section class="day" id="d14">
 <div class="day-grid"><aside class="day-index"><div class="dayno">14</div><div class="date">FEB 11 · THU</div><h2>最後一頁。</h2><p>行李在車上，景點不用塞滿。</p></aside>
 <main class="day-main">
-<div class="lead-photo"><img src="./output/d14-okinawa-lastday.webp" alt="Shuri Castle" loading="lazy" decoding="async" fetchpriority="low" width="2000" height="1333" onerror="this.onerror=null;this.src='./output/d14-okinawa-lastday.jpg'"></div>
+<div class="lead-photo"><img src="./output/d14-okinawa-lastday.jpg" alt="Shuri Castle" loading="lazy" decoding="async" fetchpriority="low"></div>
 <div class="caption">OKINAWA → KAOHSIUNG / END</div>
 <div class="timeline">
 <div class="time">上午</div><div class="event"><strong>Check-out</strong><p>行李留在車上，開始最後半日。</p></div>
@@ -713,10 +761,8 @@ body::before{content:"";position:fixed;z-index:100;top:0;left:0;width:var(--scro
  add('.section-head,.overview-grid > *,.factlist,.route-strip,.timeline,.day-note,.practical-card,.chapter','reveal');
  add('.day-index','.reveal-left');
  add('.lead-photo,.photo-pair,.hero-visual','reveal-scale');
- const photoMotions=['fx-curtain','fx-rise','fx-focus','fx-pan','fx-slice','fx-wipe'];
- document.querySelectorAll('.lead-photo,.photo-pair').forEach((el,i)=>el.classList.add(photoMotions[i%photoMotions.length]));
  const targets=document.querySelectorAll('.reveal,.reveal-left,.reveal-scale');
- const io=new IntersectionObserver(entries=>entries.forEach(x=>{if(x.isIntersecting){x.target.classList.add('is-visible');io.unobserve(x.target)}}),{threshold:.14,rootMargin:'0px 0px -8% 0px'});
+ const io=new IntersectionObserver(entries=>entries.forEach(x=>{if(x.isIntersecting){x.target.classList.add('is-visible')}else{x.target.classList.remove('is-visible')}}),{threshold:.14,rootMargin:'0px 0px -8% 0px'});
  targets.forEach(e=>io.observe(e));
  if(!matchMedia('(prefers-reduced-motion: reduce)').matches){
    const hero=document.querySelector('.hero-visual'),img=document.querySelector('.hero-visual .sea img');
